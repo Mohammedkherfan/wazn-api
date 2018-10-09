@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <property name="DEV_HOME" value="../../wazn/logs" />
+    <property name="LOG_FILE_NAME" value="log" />
+    <property name="APPLICATION_LOG_LEVEL" value="DEBUG" /><!-- ALL,TRACE,DEBUG,INFO,WARN,ERROR-->
+    <property name="EXISITING_FRAMEWORKS_LOG_LEVEL" value="INFO" /><!-- ALL,TRACE,DEBUG,INFO,WARN,ERROR-->
+
+
+
+    <timestamp key="byHour" datePattern="yyyyMMdd.HH" />
+    <appender name="FILE-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${DEV_HOME}/${LOG_FILE_NAME}-${byHour}.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-mm-yyyy} | %date{HH:mm:ss.SSS} [%thread] |%5level| %logger{40} | %msg %ex{full} %n</Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${DEV_HOME}/archived/log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="CONSOLE-LOG" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-mm-yyyy} | %date{HH:mm:ss.SSS} [%thread] |%5level| %logger{40} | %msg %ex{full} %n</Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com" level="${APPLICATION_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="FILE-LOG" />
+        <appender-ref ref="CONSOLE-LOG" />
+    </logger>
+
+
+    <root name="." level="${EXISITING_FRAMEWORKS_LOG_LEVEL}">
+        <appender-ref ref="FILE-LOG" />
+        <appender-ref ref="CONSOLE-LOG" />
+    </root>
+
+    <root name="org.springframework" level="${EXISITING_FRAMEWORKS_LOG_LEVEL}">
+        <appender-ref ref="FILE-LOG" />
+        <appender-ref ref="CONSOLE-LOG" />
+    </root>
+
+    <root name="org.hibernate" level="${EXISITING_FRAMEWORKS_LOG_LEVEL}">
+        <appender-ref ref="FILE-LOG" />
+        <appender-ref ref="CONSOLE-LOG" />
+    </root>
+
+    <root name="org.camunda" level="${EXISITING_FRAMEWORKS_LOG_LEVEL}">
+        <appender-ref ref="FILE-LOG" />
+        <appender-ref ref="CONSOLE-LOG" />
+    </root>
+
+</configuration>
