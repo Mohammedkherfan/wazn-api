@@ -25,4 +25,8 @@ public interface AccountController {
     Resource<AddMeetingScheduleResponse> addMeeting(String mobile, AddMeetingScheduleRequest request);
 
     List<Resource<ListMeetingResponse>> listMeeting();
+
+    Resource<GetMeetingScheduleResponse> getMeeting(String mobile);
+
+    Boolean checkMeetingTime(String mobile);
 }

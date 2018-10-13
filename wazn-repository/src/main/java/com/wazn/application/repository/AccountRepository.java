@@ -19,4 +19,6 @@ public interface AccountRepository {
     String addMeeting(Meeting meeting);
 
     List<Meeting> listMeeting();
+
+    Meeting getMeeting(String mobile);
 }

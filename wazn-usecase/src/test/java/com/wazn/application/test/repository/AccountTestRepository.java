@@ -93,4 +93,13 @@ public class AccountTestRepository implements AccountRepository  {
     public List<Meeting> listMeeting() {
         return listMeeting;
     }
+
+    @Override
+    public Meeting getMeeting(String mobile) {
+        for (Meeting meeting : listMeeting) {
+            if (meeting.getMobile().equals(mobile))
+                return meeting;
+        }
+        throw new MeetingScheduleException("Meeting Not Found");
+    }
 }

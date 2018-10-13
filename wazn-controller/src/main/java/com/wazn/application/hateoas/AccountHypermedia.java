@@ -20,6 +20,7 @@ public class AccountHypermedia {
     private static final String LOGIN = "login";
     private static final String ADD_MEETING = "addMeeting";
     private static final String LIST_MEETING = "listMeeting";
+    private static final String FIND_MEETING = "findMeeting";
     
     public Resource getAccountResources(Object object, String operation) {
         Resource resource = null;
@@ -38,7 +39,21 @@ public class AccountHypermedia {
             resource = getAddMeetingResources(object);
         if (operation.equals(LIST_MEETING))
             resource = getListMeetingResources(object);
+        if (operation.equals(FIND_MEETING))
+            resource = getFindMeeting(object);
         return resource;
+    }
+
+    private Resource getFindMeeting(Object object) {
+        Resource resource = null;
+        if (!isNull(object)) {
+            ListMeetingResponse response = (ListMeetingResponse) object;
+            resource = new Resource(response);
+            resource.add(linkTo(methodOn(AccountControllerImp.class).getMeeting(response.getMobile())).withSelfRel().withType("GET"));
+            resource = new Resource(response);
+            return resource;
+        }
+        return new Resource(new AddMeetingScheduleResponse());
     }
 
     private Resource getListMeetingResources(Object object) {

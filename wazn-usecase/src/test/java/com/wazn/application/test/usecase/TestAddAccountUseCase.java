@@ -603,13 +603,13 @@ public class TestAddAccountUseCase {
         accountService.generateReport("+962798988910");
     }
 
-    @Test
+   /* @Test
     public void whenGenerateReport_AndAccountExist_ThenShouldGenerateReport() {
         AddAccountResponse addAccountResponse = accountService.addAccount(addAccountRequest);
         AddDocumentResponse addDocumentResponse = accountService.addDocument(addAccountResponse.getMobile(), addDocumentRequest);
         accountService.generateReport(addDocumentResponse.getMobile());
     }
-
+*/
     @Test(expected = InvalidAccountMobileException.class)
     public void whenAddMeeting_AndAccountMobileIsNull_ThenShouldPersistException() {
         accountService.addMeeting(null, addMeetingScheduleRequest);

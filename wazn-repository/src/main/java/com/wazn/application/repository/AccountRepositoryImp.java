@@ -103,4 +103,16 @@ public class AccountRepositoryImp implements AccountRepository {
             throw new AccountException(ex.getMessage());
         }
     }
+
+    @Override
+    public Meeting getMeeting(String mobile) {
+        try {
+            if (meetingScheduleCrudRepository.existsById(mobile))
+                return meetingMapper.toMeeting(meetingScheduleCrudRepository.findById(mobile).get());
+            else
+                throw new MeetingScheduleException("Meeting Not Found");
+        }catch (Exception ex) {
+            throw new AccountException(ex.getMessage());
+        }
+    }
 }

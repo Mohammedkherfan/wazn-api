@@ -24,4 +24,8 @@ public interface AccountService {
     AddMeetingScheduleResponse addMeeting(String mobile, AddMeetingScheduleRequest request);
 
     List<ListMeetingResponse> listMeeting();
+
+    GetMeetingScheduleResponse getMeeting(String mobile);
+
+    Boolean checkMeetingTime(String mobile);
 }

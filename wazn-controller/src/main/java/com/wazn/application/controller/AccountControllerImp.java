@@ -180,4 +180,38 @@ public class AccountControllerImp implements AccountController {
             throw new MeetingScheduleException(ex.getMessage());
         }
     }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/findMeeting", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin()
+    @ApiOperation(value = "Method to find meeting.", notes = "This method used when you want to find meeting.")
+    public Resource<GetMeetingScheduleResponse> getMeeting(String mobile) {
+        GetMeetingScheduleResponse getMeetingScheduleResponse = null;
+        try {
+            getMeetingScheduleResponse = gateway.getMeeting(mobile);
+            return hypermedia.getAccountResources(getMeetingScheduleResponse, "findMeeting");
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: getMeeting" + ", Exception: " + ex);
+            throw new AccountException(ex.getMessage());
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/checkMeeting", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin()
+    @ApiOperation(value = "Method to check meeting.", notes = "This method used when you want to check meeting.")
+    public Boolean checkMeetingTime(String mobile) {
+        try {
+             return gateway.checkMeetingTime(mobile);
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: checkMeetingTime" + ", Exception: " + ex);
+            throw new AccountException(ex.getMessage());
+        }
+    }
 }

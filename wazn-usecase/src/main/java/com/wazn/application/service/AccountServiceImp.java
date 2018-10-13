@@ -26,6 +26,8 @@ public class AccountServiceImp implements AccountService {
     private GenerateReportUseCase generateReportUseCase;
     private AddMeetingScheduleUseCase addMeetingScheduleUseCase;
     private ListMeetingUseCase listMeetingUseCase;
+    private GetMeetingScheduleUseCase getMeetingScheduleUseCase;
+    private CheckMeetingTimeUseCase checkMeetingTimeUseCase;
 
     public AccountServiceImp(AccountRepository repository) {
         this.addAccountUseCase = new AddAccountUseCaseImp(repository);
@@ -36,6 +38,8 @@ public class AccountServiceImp implements AccountService {
         this.generateReportUseCase = new GenerateReportUseCaseImp(repository);
         this.addMeetingScheduleUseCase = new AddMeetingScheduleUseCaseImp(repository);
         this.listMeetingUseCase = new ListMeetingUseCaseImp(repository);
+        this.getMeetingScheduleUseCase = new GetMeetingScheduleUseCaseImp(repository);
+        this.checkMeetingTimeUseCase = new CheckMeetingTimeUseCaseImp(repository);
     }
 
     @Override
@@ -93,5 +97,19 @@ public class AccountServiceImp implements AccountService {
     @Override
     public List<ListMeetingResponse> listMeeting() {
         return listMeetingUseCase.listMeeting();
+    }
+
+    @Override
+    public GetMeetingScheduleResponse getMeeting(String mobile) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        return getMeetingScheduleUseCase.getMeeting(mobile);
+    }
+
+    @Override
+    public Boolean checkMeetingTime(String mobile) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        return checkMeetingTimeUseCase.checkMeetingTime(mobile);
     }
 }

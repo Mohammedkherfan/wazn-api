@@ -31,4 +31,8 @@ public class AccountGateway {
     public AddMeetingScheduleResponse addMeeting(String mobile, AddMeetingScheduleRequest request) { return service.addMeeting(mobile, request); }
 
     public List<ListMeetingResponse> listMeeting() { return service.listMeeting(); }
+
+    public GetMeetingScheduleResponse getMeeting(String mobile) { return service.getMeeting(mobile); }
+
+    public Boolean checkMeetingTime(String mobile) { return service.checkMeetingTime(mobile); }
 }
