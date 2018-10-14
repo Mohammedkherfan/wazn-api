@@ -6,6 +6,8 @@ import com.wazn.application.repository.AccountRepository;
 import com.wazn.application.request.AddMeetingScheduleRequest;
 import com.wazn.application.response.AddMeetingScheduleResponse;
 
+import java.time.LocalDateTime;
+
 public class AddMeetingScheduleUseCaseImp implements AddMeetingScheduleUseCase {
 
     private AccountRepository accountRepository;
@@ -19,8 +21,8 @@ public class AddMeetingScheduleUseCaseImp implements AddMeetingScheduleUseCase {
         try {
             Meeting meeting = new Meeting.Builder()
                     .mobile(mobile)
-                    .startDate(request.getStartDate())
-                    .endDate(request.getEndDate())
+                    .startDate(LocalDateTime.parse(request.getStartDate()))
+                    .endDate(LocalDateTime.parse(request.getEndDate()))
                     .note(request.getNote())
                     .build();
             return new AddMeetingScheduleResponse(accountRepository.addMeeting(meeting));

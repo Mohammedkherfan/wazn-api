@@ -60,7 +60,7 @@ public class TestAccountIntegration {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(new MockHttpServletRequest()));
         addAccountRequest = new AddAccountRequest("mohammed.kherfan@gmail.com", "+962798988910", "Mohammed Kherfan", "P@ssw0rd", "P@ssw0rd");
         addDocumentRequest = new AddDocumentRequest("V-doc", "073955554", "UAE", "1561656", "53153", LocalDate.now().toString(), "own", "help desk commint", LocalDate.now().minusYears(22).toString(), "Male", "Jordanian", new byte[]{1}, new byte[]{1}, new byte[]{2}, LocalDateTime.now().toString(), "Office", "Mohammed", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
-        addMeetingScheduleRequest = new AddMeetingScheduleRequest(LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(1), "note");
+        addMeetingScheduleRequest = new AddMeetingScheduleRequest(LocalDateTime.now().plusDays(1).toString(), LocalDateTime.now().plusDays(1).toString(), "note");
     }
 
     @After
@@ -672,7 +672,7 @@ public class TestAccountIntegration {
 
     @Test(expected = MeetingScheduleException.class)
     public void whenAddMeeting_AndAccountStartDateIsBeforeToday_ThenShouldPersistException() {
-        addMeetingScheduleRequest.setStartDate(LocalDateTime.now().minusDays(1));
+        addMeetingScheduleRequest.setStartDate(LocalDateTime.now().minusDays(1).toString());
         accountController.addMeeting("+962798988910", addMeetingScheduleRequest);
     }
 
@@ -684,14 +684,14 @@ public class TestAccountIntegration {
 
     @Test(expected = MeetingScheduleException.class)
     public void whenAddMeeting_AndAccountEndDateIsBeforeToday_ThenShouldPersistException() {
-        addMeetingScheduleRequest.setEndDate(LocalDateTime.now().minusDays(1));
+        addMeetingScheduleRequest.setEndDate(LocalDateTime.now().minusDays(1).toString());
         accountController.addMeeting("+962798988910", addMeetingScheduleRequest);
     }
 
     @Test(expected = MeetingScheduleException.class)
     public void whenAddMeeting_AndAccountEndDateIsBeforeStartdate_ThenShouldPersistException() {
-        addMeetingScheduleRequest.setEndDate(LocalDateTime.now().minusDays(1));
-        addMeetingScheduleRequest.setStartDate(LocalDateTime.now().plusDays(1));
+        addMeetingScheduleRequest.setEndDate(LocalDateTime.now().minusDays(1).toString());
+        addMeetingScheduleRequest.setStartDate(LocalDateTime.now().plusDays(1).toString());
         accountController.addMeeting("+962798988910", addMeetingScheduleRequest);
     }
 

@@ -114,9 +114,10 @@ public class AccountControllerImp implements AccountController {
     @CrossOrigin()
     @ApiOperation(value = "Method to login to account.", notes = "This method used when you want to login to account.")
     @ApiParam(value = "The parameter for this operation.", name = "mobile, password")
-    public Resource<LoginResponse> login(String mobile, String password) {
+    public Resource<LoginResponse> login(@PathVariable String mobile, @PathVariable String password) {
         LoginResponse loginResponse = null;
         try {
+            System.out.println("mobile------"+mobile+"-------password-------"+password);
             loginResponse = gateway.login(mobile, password);
             return hypermedia.getAccountResources(loginResponse, "login");
         } catch (AccountException ex) {
@@ -133,7 +134,7 @@ public class AccountControllerImp implements AccountController {
     @CrossOrigin()
     @ApiOperation(value = "Method to generate report.", notes = "This method used when you want to generate report.")
     @ApiParam(value = "The parameter for this operation.", name = "mobile")
-    public void generateReport(String mobile) {
+    public void generateReport(@PathVariable String mobile) {
         try {
             gateway.generateReport(mobile);
         }catch (Exception ex) {
@@ -148,7 +149,7 @@ public class AccountControllerImp implements AccountController {
     @CrossOrigin()
     @ApiOperation(value = "Method to create new meeting.", notes = "This method used when you want to add meeting.")
     @ApiParam(value = "The parameter for this operation.", name = "mobile, addMeetingScheduleRequest")
-    public Resource<AddMeetingScheduleResponse> addMeeting(String mobile, AddMeetingScheduleRequest request) {
+    public Resource<AddMeetingScheduleResponse> addMeeting(@PathVariable String mobile, @RequestBody AddMeetingScheduleRequest request) {
         AddMeetingScheduleResponse addMeetingScheduleResponse = null;
         try {
             addMeetingScheduleResponse = gateway.addMeeting(mobile, request);
@@ -186,7 +187,7 @@ public class AccountControllerImp implements AccountController {
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin()
     @ApiOperation(value = "Method to find meeting.", notes = "This method used when you want to find meeting.")
-    public Resource<GetMeetingScheduleResponse> getMeeting(String mobile) {
+    public Resource<GetMeetingScheduleResponse> getMeeting(@PathVariable String mobile) {
         GetMeetingScheduleResponse getMeetingScheduleResponse = null;
         try {
             getMeetingScheduleResponse = gateway.getMeeting(mobile);
@@ -204,7 +205,7 @@ public class AccountControllerImp implements AccountController {
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin()
     @ApiOperation(value = "Method to check meeting.", notes = "This method used when you want to check meeting.")
-    public Boolean checkMeetingTime(String mobile) {
+    public Boolean checkMeetingTime(@PathVariable String mobile) {
         try {
              return gateway.checkMeetingTime(mobile);
         } catch (AccountException ex) {

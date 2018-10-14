@@ -51,14 +51,16 @@ public class AccountServiceImp implements AccountService {
     @Override
     public GetAccountResponse getAccount(String mobile) {
         MobileValidator mobileValidator = new MobileValidator();
-        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         return getAccountUseCase.getAccount(mobile);
     }
 
     @Override
     public VerificationCodeResponse verifyCode(String mobile, String code) {
         MobileValidator mobileValidator = new MobileValidator();
-        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         if (isNull(code) || code.trim().isEmpty()) throw new InvalidVerificationCodeException("Invalid Verification Code");
         return verificationCodeUseCase.verifyCode(mobile, code);
     }
@@ -66,7 +68,8 @@ public class AccountServiceImp implements AccountService {
     @Override
     public AddDocumentResponse addDocument(String mobile, AddDocumentRequest request) {
         MobileValidator mobileValidator = new MobileValidator();
-        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         if (isNull(request)) throw new InvalidAccountRequestException("Invalid Request");
         return addDocumentUseCase.addDocument(mobile, request);
     }
@@ -74,7 +77,8 @@ public class AccountServiceImp implements AccountService {
     @Override
     public LoginResponse login(String mobile, String password) {
         MobileValidator mobileValidator = new MobileValidator();
-        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         if (isNull(password) || password.trim().isEmpty()) throw new InvalidAccountPasswordException("Invalid Password (Password Empty)");
         return loginUseCase.login(mobile, password);
     }
@@ -82,14 +86,16 @@ public class AccountServiceImp implements AccountService {
     @Override
     public void generateReport(String mobile) {
         MobileValidator mobileValidator = new MobileValidator();
-        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         generateReportUseCase.generateReport(mobile);
     }
 
     @Override
     public AddMeetingScheduleResponse addMeeting(String mobile, AddMeetingScheduleRequest request) {
         MobileValidator mobileValidator = new MobileValidator();
-        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         if (isNull(request)) throw new InvalidAccountRequestException("Invalid Request");
         return addMeetingScheduleUseCase.addMeeting(mobile, request);
     }
@@ -102,14 +108,16 @@ public class AccountServiceImp implements AccountService {
     @Override
     public GetMeetingScheduleResponse getMeeting(String mobile) {
         MobileValidator mobileValidator = new MobileValidator();
-        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         return getMeetingScheduleUseCase.getMeeting(mobile);
     }
 
     @Override
     public Boolean checkMeetingTime(String mobile) {
         MobileValidator mobileValidator = new MobileValidator();
-        if (isNull(mobile) || mobile.trim().isEmpty() || !mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         return checkMeetingTimeUseCase.checkMeetingTime(mobile);
     }
 }

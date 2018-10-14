@@ -58,8 +58,8 @@ public class Validator {
     }
 
     private void meetingTimeValidation(LocalDateTime startDate, LocalDateTime endDate) {
-        if (endDate.isAfter(startDate))
-            throw new MeetingScheduleException("Invalid Meeting End Date After Start Date !");
+        if (endDate.isBefore(startDate))
+            throw new MeetingScheduleException("Invalid Meeting End Date Before Start Date !");
     }
 
 

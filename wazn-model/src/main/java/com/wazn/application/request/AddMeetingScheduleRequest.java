@@ -1,35 +1,33 @@
 package com.wazn.application.request;
 
-import java.time.LocalDateTime;
-
 public class AddMeetingScheduleRequest {
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private String startDate;
+    private String endDate;
     private String note;
 
     public AddMeetingScheduleRequest() {
     }
 
-    public AddMeetingScheduleRequest(LocalDateTime startDate, LocalDateTime endDate, String note) {
+    public AddMeetingScheduleRequest(String startDate, String endDate, String note) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.note = note;
     }
 
-    public LocalDateTime getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
