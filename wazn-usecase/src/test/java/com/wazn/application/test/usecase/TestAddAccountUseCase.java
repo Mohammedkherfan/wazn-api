@@ -33,7 +33,7 @@ public class TestAddAccountUseCase {
         accountService = new AccountServiceImp(accountRepository);
         addAccountRequest = new AddAccountRequest("mohammed.kherfan@gmail.com", "+962798988910", "Mohammed Kherfan", "P@ssw0rd", "P@ssw0rd");
         addDocumentRequest = new AddDocumentRequest("V-doc", "073955554", "UAE", "1561656", "53153", LocalDate.now().toString(), "own", "help desk commint", LocalDate.now().minusYears(22).toString(), "Male", "Jordanian", new byte[]{1}, new byte[]{1}, new byte[]{2}, LocalDateTime.now().toString(), "Office", "Mohammed", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
-        addMeetingScheduleRequest = new AddMeetingScheduleRequest(LocalDateTime.now().plusDays(1).toString(), LocalDateTime.now().plusDays(1).toString(), "note");
+        addMeetingScheduleRequest = new AddMeetingScheduleRequest("2019-11-01 10:00", "2019-11-01 11:00", "note");
     }
 
     @Test(expected = InvalidAccountRequestException.class)

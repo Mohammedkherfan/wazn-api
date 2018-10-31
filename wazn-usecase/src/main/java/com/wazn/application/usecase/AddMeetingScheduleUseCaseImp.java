@@ -7,6 +7,7 @@ import com.wazn.application.request.AddMeetingScheduleRequest;
 import com.wazn.application.response.AddMeetingScheduleResponse;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class AddMeetingScheduleUseCaseImp implements AddMeetingScheduleUseCase {
 
@@ -19,10 +20,11 @@ public class AddMeetingScheduleUseCaseImp implements AddMeetingScheduleUseCase {
     @Override
     public AddMeetingScheduleResponse addMeeting(String mobile, AddMeetingScheduleRequest request) {
         try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             Meeting meeting = new Meeting.Builder()
                     .mobile(mobile)
-                    .startDate(LocalDateTime.parse(request.getStartDate()))
-                    .endDate(LocalDateTime.parse(request.getEndDate()))
+                    .startDate(LocalDateTime.parse(request.getStartDate(), formatter))
+                    .endDate(LocalDateTime.parse(request.getEndDate(), formatter))
                     .note(request.getNote())
                     .build();
             return new AddMeetingScheduleResponse(accountRepository.addMeeting(meeting));
