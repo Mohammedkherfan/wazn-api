@@ -41,23 +41,25 @@
                         <section class="table">
                             <table>
                                 <tr>
-                                    Account
+                                    Meeting
                                 </tr></br></br>
                                 <thead>
-                                <tr>
-                                    <th class="cell100">Mobile</th>
-                                    <th class="cell100">Email</th>
-                                    <th class="cell100">Name</th>
-                                </tr>
+                                    <tr>
+                                        <th class="cell100">Mobile</th>
+                                        <th class="cell100">Start Date</th>
+                                        <th class="cell100">End Date</th>
+                                        <th class="cell100">Note</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <th:block th:each="data : ${allAccount}">
-                                    <tr>
-                                        <td th:text="${data.mobile}" class="cell100"></td>
-                                        <td th:text="${data.email}" class="cell100"></td>
-                                        <td th:text="${data.name}" class="cell100"></td>
-                                    </tr>
-                                </th:block>
+                                    <th:block th:each="data : ${allMeeting}">
+                                        <tr>
+                                            <td th:text="${data.mobile}" class="cell100"></td>
+                                            <td th:text="${data.startDate}" class="cell100"></td>
+                                            <td th:text="${data.endDate}" class="cell100"></td>
+                                            <td th:text="${data.note}" class="cell100"></td>
+                                        </tr>
+                                    </th:block>
                                 </tbody>
                             </table>
                         </section>

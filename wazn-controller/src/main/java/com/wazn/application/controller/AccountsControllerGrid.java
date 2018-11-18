@@ -23,16 +23,37 @@ public class AccountsControllerGrid {
     @Autowired
     private MeetingScheduleCrudRepository meetingScheduleCrudRepository;
 
+    @RequestMapping("/dashboard")
+    public ModelAndView getDashboard() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("dashboard");
+        return modelAndView;
+    }
+
     @RequestMapping("/getAccountData")
-    public ModelAndView getData() {
+    public ModelAndView getAccountData() {
         ModelAndView modelAndView = new ModelAndView();
         Iterable<AccountEntity> allAccount = accountCrudRepository.findAll();
-        Iterable<DocumentEntity> allDocument = documentCrudRepository.findAll();
-        Iterable<MeetingEntity> allMeeting = meetingScheduleCrudRepository.findAll();
         modelAndView.addObject("allAccount",allAccount);
-        modelAndView.addObject("allDocument",allDocument);
-        modelAndView.addObject("allMeeting",allMeeting);
         modelAndView.setViewName("account");
+        return modelAndView;
+    }
+
+    @RequestMapping("/getDocumentData")
+    public ModelAndView getDocumentData() {
+        ModelAndView modelAndView = new ModelAndView();
+        Iterable<DocumentEntity> allDocument = documentCrudRepository.findAll();
+        modelAndView.addObject("allDocument",allDocument);
+        modelAndView.setViewName("document");
+        return modelAndView;
+    }
+
+    @RequestMapping("/getMeetingData")
+    public ModelAndView getMeetingData() {
+        ModelAndView modelAndView = new ModelAndView();
+        Iterable<MeetingEntity> allMeeting = meetingScheduleCrudRepository.findAll();
+        modelAndView.addObject("allMeeting",allMeeting);
+        modelAndView.setViewName("meeting");
         return modelAndView;
     }
 }
