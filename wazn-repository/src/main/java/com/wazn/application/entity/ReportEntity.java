@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "JAZEEL_ACCOUNT_REPORT")
+@Table(name = "WAZN_ACCOUNT_REPORT")
 public class ReportEntity {
 
     @Id

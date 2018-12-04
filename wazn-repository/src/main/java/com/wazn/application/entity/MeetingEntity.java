@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "JAZEEL_MEETING_SCHEDULE")
+@Table(name = "WAZN_MEETING_SCHEDULE")
 public class MeetingEntity {
 
     @Id

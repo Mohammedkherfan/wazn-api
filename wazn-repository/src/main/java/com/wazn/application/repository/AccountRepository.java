@@ -1,6 +1,7 @@
 package com.wazn.application.repository;
 
 import com.wazn.application.model.Account;
+import com.wazn.application.model.AccountType;
 import com.wazn.application.model.Document;
 import com.wazn.application.model.Meeting;
 
@@ -21,4 +22,10 @@ public interface AccountRepository {
     List<Meeting> listMeeting();
 
     Meeting getMeeting(String mobile);
+
+    String updateMeeting(Meeting meeting);
+
+    String addAccountType(AccountType accountType);
+
+    AccountType getAccountType(String mobile);
 }

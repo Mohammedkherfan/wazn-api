@@ -10,8 +10,9 @@ public class Account {
     private String verificationCode;
     private String password;
     private String confirmPassword;
+    private AccountType accountType;
 
-    public Account(String email, String mobile, String fullName, String verificationCode, String password, String confirmPassword) {
+    public Account(String email, String mobile, String fullName, String verificationCode, String password, String confirmPassword, AccountType accountType) {
         new Validator(email, mobile, fullName, password, confirmPassword);
         this.email = email;
         this.mobile = mobile;
@@ -19,6 +20,7 @@ public class Account {
         this.verificationCode = verificationCode;
         this.password = password;
         this.confirmPassword = confirmPassword;
+        this.accountType = accountType;
     }
 
     public String getEmail() {
@@ -45,6 +47,10 @@ public class Account {
         return confirmPassword;
     }
 
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
     public static class Builder {
 
         private String email;
@@ -53,6 +59,7 @@ public class Account {
         private String verificationCode;
         private String password;
         private String confirmPassword;
+        private AccountType accountType;
 
         public Builder email(String email) {
             this.email = email;
@@ -84,8 +91,13 @@ public class Account {
             return this;
         }
 
+        public Builder accountType(AccountType accountType) {
+            this.accountType = accountType;
+            return this;
+        }
+
         public Account build() {
-            return new Account(email, mobile, fullName, verificationCode, password, confirmPassword);
+            return new Account(email, mobile, fullName, verificationCode, password, confirmPassword, accountType);
         }
     }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "JAZEEL_ACCOUNT_DOC")
+@Table(name = "WAZN_ACCOUNT_DOC")
 public class DocumentEntity {
 
     @Id

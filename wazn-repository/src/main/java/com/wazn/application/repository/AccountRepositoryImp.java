@@ -3,6 +3,7 @@ package com.wazn.application.repository;
 import com.wazn.application.exception.*;
 import com.wazn.application.mapper.*;
 import com.wazn.application.model.Account;
+import com.wazn.application.model.AccountType;
 import com.wazn.application.model.Document;
 import com.wazn.application.model.Meeting;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,16 @@ public class AccountRepositoryImp implements AccountRepository {
     @Autowired
     private DocumentCrudRepository documentCrudRepository;
 
-    @Autowired MeetingScheduleCrudRepository meetingScheduleCrudRepository;
+    @Autowired
+    private MeetingScheduleCrudRepository meetingScheduleCrudRepository;
+
+    @Autowired
+    private AccountTypeCrudRepository accountTypeCrudRepository;
 
     private AccountMapper accountMapper = new AccountMapperImp();
     private DocumentMapper documentMapper = new DocumentMapperImp();
     private MeetingMapper meetingMapper = new MeetingMapperImp();
+    private AccountTypeMapper accountTypeMapper = new AccountTypeMapperImp();
 
     @Override
     @Transactional
@@ -40,8 +46,9 @@ public class AccountRepositoryImp implements AccountRepository {
     @Override
     public Account getAccount(String mobile) {
         try {
-            if (accountCrudRepository.existsById(mobile))
+            if (accountCrudRepository.existsById(mobile)) {
                 return accountMapper.toAccount(accountCrudRepository.findById(mobile).get());
+            }
             throw new AccountNotFoundException("Account Not Found !");
         }catch (Exception ex) {
             throw new AccountException(ex.getMessage());
@@ -111,6 +118,46 @@ public class AccountRepositoryImp implements AccountRepository {
                 return meetingMapper.toMeeting(meetingScheduleCrudRepository.findById(mobile).get());
             else
                 throw new MeetingScheduleException("Meeting Not Found");
+        }catch (Exception ex) {
+            throw new AccountException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public String updateMeeting(Meeting meeting) {
+        try {
+            if (meetingScheduleCrudRepository.existsById(meeting.getMobile()))
+                return meetingScheduleCrudRepository.save(meetingMapper.toMeetingEntity(meeting)).getMobile();
+            else
+                throw new MeetingScheduleException("Meeting Not Found");
+        }catch (Exception ex) {
+            throw new AccountException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public String addAccountType(AccountType accountType) {
+        try {
+            if (accountCrudRepository.existsById(accountType.getMobile())) {
+                if (accountTypeCrudRepository.existsById(accountType.getMobile()))
+                    throw new DocumentAlreadyExistException("Account Already Exist !");
+                else
+                    return accountTypeCrudRepository.save(accountTypeMapper.toAccountTypeEntity(accountType)).getMobile();
+            } else {
+                throw new AccountNotFoundException("Account Not Found !");
+            }
+        }catch (Exception ex) {
+            throw new AccountException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public AccountType getAccountType(String mobile) {
+        try {
+            if (accountTypeCrudRepository.existsById(mobile))
+                return accountTypeMapper.toAccountType(accountTypeCrudRepository.findById(mobile).get());
+            else
+                throw new AccountNotFoundException("Account Not Found !");
         }catch (Exception ex) {
             throw new AccountException(ex.getMessage());
         }

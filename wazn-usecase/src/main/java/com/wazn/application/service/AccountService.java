@@ -1,8 +1,6 @@
 package com.wazn.application.service;
 
-import com.wazn.application.request.AddAccountRequest;
-import com.wazn.application.request.AddDocumentRequest;
-import com.wazn.application.request.AddMeetingScheduleRequest;
+import com.wazn.application.request.*;
 import com.wazn.application.response.*;
 
 import java.util.List;
@@ -28,4 +26,10 @@ public interface AccountService {
     GetMeetingScheduleResponse getMeeting(String mobile);
 
     Boolean checkMeetingTime(String mobile);
+
+    UpdateMeetingScheduleResponse updateMeeting(String mobile, UpdateMeetingScheduleRequest request);
+
+    AddAccountTypeResponse addAccountType(String mobile, AddAccountTypeRequest request);
+
+    GetAccountTypeResponse getAccountType(String mobile);
 }

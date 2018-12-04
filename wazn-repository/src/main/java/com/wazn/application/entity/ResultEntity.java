@@ -3,7 +3,7 @@ package com.wazn.application.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "JAZEEL_ACCOUNT_RESULT")
+@Table(name = "WAZN_ACCOUNT_RESULT")
 public class ResultEntity {
 
     @Id

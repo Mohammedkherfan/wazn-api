@@ -1,8 +1,6 @@
 package com.wazn.application.gateway;
 
-import com.wazn.application.request.AddAccountRequest;
-import com.wazn.application.request.AddDocumentRequest;
-import com.wazn.application.request.AddMeetingScheduleRequest;
+import com.wazn.application.request.*;
 import com.wazn.application.response.*;
 import com.wazn.application.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +33,10 @@ public class AccountGateway {
     public GetMeetingScheduleResponse getMeeting(String mobile) { return service.getMeeting(mobile); }
 
     public Boolean checkMeetingTime(String mobile) { return service.checkMeetingTime(mobile); }
+
+    public UpdateMeetingScheduleResponse updateMeeting(String mobile, UpdateMeetingScheduleRequest request) { return service.updateMeeting(mobile, request); }
+
+    public AddAccountTypeResponse addAccountType(String mobile, AddAccountTypeRequest request) { return service.addAccountType(mobile, request); }
+
+    public GetAccountTypeResponse getAccountType(String mobile) { return service.getAccountType(mobile); }
 }

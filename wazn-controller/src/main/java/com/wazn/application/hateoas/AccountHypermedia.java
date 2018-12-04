@@ -1,9 +1,7 @@
 package com.wazn.application.hateoas;
 
 import com.wazn.application.controller.AccountControllerImp;
-import com.wazn.application.request.AddAccountRequest;
-import com.wazn.application.request.AddDocumentRequest;
-import com.wazn.application.request.AddMeetingScheduleRequest;
+import com.wazn.application.request.*;
 import com.wazn.application.response.*;
 import org.springframework.hateoas.Resource;
 
@@ -21,6 +19,9 @@ public class AccountHypermedia {
     private static final String ADD_MEETING = "addMeeting";
     private static final String LIST_MEETING = "listMeeting";
     private static final String FIND_MEETING = "findMeeting";
+    private static final String UPDATE_MEETING = "updateMeeting";
+    private static final String ADD_ACCOUNT_TYPE = "addAccountType";
+    private static final String FIND_ACCOUNT_TYPE = "findAccountType";
     
     public Resource getAccountResources(Object object, String operation) {
         Resource resource = null;
@@ -41,7 +42,49 @@ public class AccountHypermedia {
             resource = getListMeetingResources(object);
         if (operation.equals(FIND_MEETING))
             resource = getFindMeeting(object);
+        if (operation.equals(UPDATE_MEETING))
+            resource = getUpdateMeeting(object);
+        if (operation.equals(ADD_ACCOUNT_TYPE))
+            resource = getAddAccountType(object);
+        if (operation.equals(FIND_ACCOUNT_TYPE))
+            resource = getFindAccountType(object);
         return resource;
+    }
+
+    private Resource getFindAccountType(Object object) {
+        Resource resource = null;
+        if (!isNull(object)) {
+            GetAccountTypeResponse response = (GetAccountTypeResponse) object;
+            resource = new Resource(response);
+            resource.add(linkTo(methodOn(AccountControllerImp.class).getAccountType(response.getMobile())).withSelfRel().withType("GET"));
+            resource = new Resource(response);
+            return resource;
+        }
+        return new Resource(new GetAccountTypeResponse());
+    }
+
+    private Resource getAddAccountType(Object object) {
+        Resource resource = null;
+        if (!isNull(object)) {
+            AddAccountTypeResponse response = (AddAccountTypeResponse) object;
+            resource = new Resource(response);
+            resource.add(linkTo(methodOn(AccountControllerImp.class).addAccountType(response.getMobile(), new AddAccountTypeRequest())).withSelfRel().withType("POST"));
+            resource = new Resource(response);
+            return resource;
+        }
+        return new Resource(new AddAccountTypeResponse());
+    }
+
+    private Resource getUpdateMeeting(Object object) {
+        Resource resource = null;
+        if (!isNull(object)) {
+            UpdateMeetingScheduleResponse response = (UpdateMeetingScheduleResponse) object;
+            resource = new Resource(response);
+            resource.add(linkTo(methodOn(AccountControllerImp.class).updateMeeting(response.getMobile(), new UpdateMeetingScheduleRequest())).withSelfRel().withType("PUT"));
+            resource = new Resource(response);
+            return resource;
+        }
+        return new Resource(new UpdateMeetingScheduleResponse());
     }
 
     private Resource getFindMeeting(Object object) {
@@ -53,7 +96,7 @@ public class AccountHypermedia {
             resource = new Resource(response);
             return resource;
         }
-        return new Resource(new AddMeetingScheduleResponse());
+        return new Resource(new ListMeetingResponse());
     }
 
     private Resource getListMeetingResources(Object object) {
@@ -65,7 +108,7 @@ public class AccountHypermedia {
             resource = new Resource(response);
             return resource;
         }
-        return new Resource(new AddMeetingScheduleResponse());
+        return new Resource(new ListMeetingResponse());
     }
 
     private Resource getAddMeetingResources(Object object) {

@@ -5,9 +5,7 @@ import com.wazn.application.exception.MeetingScheduleException;
 import com.wazn.application.exception.ReportException;
 import com.wazn.application.gateway.AccountGateway;
 import com.wazn.application.hateoas.AccountHypermedia;
-import com.wazn.application.request.AddAccountRequest;
-import com.wazn.application.request.AddDocumentRequest;
-import com.wazn.application.request.AddMeetingScheduleRequest;
+import com.wazn.application.request.*;
 import com.wazn.application.response.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -117,7 +115,6 @@ public class AccountControllerImp implements AccountController {
     public Resource<LoginResponse> login(@PathVariable String mobile, @PathVariable String password) {
         LoginResponse loginResponse = null;
         try {
-            System.out.println("mobile------"+mobile+"-------password-------"+password);
             loginResponse = gateway.login(mobile, password);
             return hypermedia.getAccountResources(loginResponse, "login");
         } catch (AccountException ex) {
@@ -215,4 +212,62 @@ public class AccountControllerImp implements AccountController {
             throw new AccountException(ex.getMessage());
         }
     }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/updateMeeting", method = RequestMethod.PUT, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin()
+    @ApiOperation(value = "Method to update new meeting.", notes = "This method used when you want to update meeting.")
+    @ApiParam(value = "The parameter for this operation.", name = "mobile, updateMeetingScheduleRequest")
+    public Resource<UpdateMeetingScheduleResponse> updateMeeting(@PathVariable String mobile, @RequestBody UpdateMeetingScheduleRequest request) {
+        UpdateMeetingScheduleResponse updateMeetingScheduleResponse = null;
+        try {
+            updateMeetingScheduleResponse = gateway.updateMeeting(mobile, request);
+            return hypermedia.getAccountResources(updateMeetingScheduleResponse, "updateMeeting");
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: updateMeeting" + ", Exception: " + ex);
+            throw new MeetingScheduleException(ex.getMessage());
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/addAccountType", method = RequestMethod.POST, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin()
+    @ApiOperation(value = "Method to add account type new meeting.", notes = "This method used when you want to add account type meeting.")
+    @ApiParam(value = "The parameter for this operation.", name = "mobile, addAccountTypeRequest")
+    public Resource<AddAccountTypeResponse> addAccountType(String mobile, AddAccountTypeRequest request) {
+        AddAccountTypeResponse addAccountTypeResponse = null;
+        try {
+            addAccountTypeResponse = gateway.addAccountType(mobile, request);
+            return hypermedia.getAccountResources(addAccountTypeResponse, "addAccountType");
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: addAccountType" + ", Exception: " + ex);
+            throw new MeetingScheduleException(ex.getMessage());
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/findAccountType", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin()
+    @ApiOperation(value = "Method to get account type.", notes = "This method used when you want to get account.")
+    @ApiParam(value = "The parameter for this operation.", name = "mobile, getAccountTypeRequest")
+    public Resource<GetAccountTypeResponse> getAccountType(String mobile) {
+        GetAccountTypeResponse getAccountTypeResponse = null;
+        try {
+            getAccountTypeResponse = gateway.getAccountType(mobile);
+            return hypermedia.getAccountResources(getAccountTypeResponse, "findAccountType");
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: getAccountType" + ", Exception: " + ex);
+            throw new MeetingScheduleException(ex.getMessage());
+        }
+    }
+
 }

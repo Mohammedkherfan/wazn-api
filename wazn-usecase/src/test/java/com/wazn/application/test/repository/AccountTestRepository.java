@@ -2,6 +2,7 @@ package com.wazn.application.test.repository;
 
 import com.wazn.application.exception.*;
 import com.wazn.application.model.Account;
+import com.wazn.application.model.AccountType;
 import com.wazn.application.model.Document;
 import com.wazn.application.model.Meeting;
 import com.wazn.application.repository.AccountRepository;
@@ -14,6 +15,7 @@ public class AccountTestRepository implements AccountRepository  {
     private List<Account> listAccount = new ArrayList<>();
     private List<Document> listDocument = new ArrayList<>();
     private List<Meeting> listMeeting = new ArrayList<>();
+    private List<AccountType> listAccountType = new ArrayList<>();
 
     @Override
     public String addAccount(Account account) {
@@ -101,5 +103,49 @@ public class AccountTestRepository implements AccountRepository  {
                 return meeting;
         }
         throw new MeetingScheduleException("Meeting Not Found");
+    }
+
+    @Override
+    public String updateMeeting(Meeting meeting) {
+        for (Meeting obj: listMeeting) {
+            if (obj.getMobile().equals(meeting.getMobile())) {
+                listMeeting.remove(obj);
+                listMeeting.add(meeting);
+                return meeting.getMobile();
+            }
+        }
+        throw new MeetingScheduleException("Meeting Not Found");
+    }
+
+    @Override
+    public String addAccountType(AccountType accountType) {
+        Boolean check = null;
+        for (Account account : listAccount) {
+            if (account.getMobile().equals(accountType.getMobile()))
+                check = Boolean.TRUE;
+            else
+                check = Boolean.FALSE;
+        }
+
+        if (check) {
+            for (AccountType meeting1 : listAccountType) {
+                if (meeting1.getMobile().equals(accountType.getMobile()))
+                    throw new MeetingAlreadyExistException("Meeting Already Scheduled");
+            }
+        }else {
+            throw new AccountNotFoundException("Account Not Exist");
+        }
+
+        listAccountType.add(accountType);
+        return accountType.getMobile();
+    }
+
+    @Override
+    public AccountType getAccountType(String mobile) {
+        for (AccountType account : listAccountType) {
+            if (account.getMobile().equals(mobile))
+                return account;
+        }
+        throw new AccountNotFoundException("Account Not Found !");
     }
 }

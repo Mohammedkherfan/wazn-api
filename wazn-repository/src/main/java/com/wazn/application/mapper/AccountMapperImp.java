@@ -2,6 +2,7 @@ package com.wazn.application.mapper;
 
 import com.wazn.application.entity.AccountEntity;
 import com.wazn.application.model.Account;
+import com.wazn.application.model.AccountType;
 
 public class AccountMapperImp implements AccountMapper {
 
@@ -27,4 +28,5 @@ public class AccountMapperImp implements AccountMapper {
         accountEntity.setPassword(account.getPassword());
         return accountEntity;
     }
+
 }

@@ -3,7 +3,7 @@ package com.wazn.application.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "JAZEEL_ACCOUNT_IMG")
+@Table(name = "WAZN_ACCOUNT_IMG")
 public class AccountImageEntity {
 
     @Id

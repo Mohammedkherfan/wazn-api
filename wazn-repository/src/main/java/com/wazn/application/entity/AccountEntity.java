@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "JAZEEL_ACCOUNT")
+@Table(name = "WAZN_ACCOUNT")
 public class AccountEntity implements Serializable {
 
     @Id
@@ -76,4 +76,5 @@ public class AccountEntity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

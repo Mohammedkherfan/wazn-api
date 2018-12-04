@@ -1,8 +1,6 @@
 package com.wazn.application.controller;
 
-import com.wazn.application.request.AddAccountRequest;
-import com.wazn.application.request.AddDocumentRequest;
-import com.wazn.application.request.AddMeetingScheduleRequest;
+import com.wazn.application.request.*;
 import com.wazn.application.response.*;
 import org.springframework.hateoas.Resource;
 
@@ -29,4 +27,10 @@ public interface AccountController {
     Resource<GetMeetingScheduleResponse> getMeeting(String mobile);
 
     Boolean checkMeetingTime(String mobile);
+
+    Resource<UpdateMeetingScheduleResponse> updateMeeting(String mobile, UpdateMeetingScheduleRequest request);
+
+    Resource<AddAccountTypeResponse> addAccountType(String mobile, AddAccountTypeRequest request);
+
+    Resource<GetAccountTypeResponse> getAccountType(String mobile);
 }

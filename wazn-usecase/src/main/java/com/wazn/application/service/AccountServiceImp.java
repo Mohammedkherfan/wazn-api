@@ -5,9 +5,7 @@ import com.wazn.application.exception.InvalidAccountPasswordException;
 import com.wazn.application.exception.InvalidAccountRequestException;
 import com.wazn.application.exception.InvalidVerificationCodeException;
 import com.wazn.application.repository.AccountRepository;
-import com.wazn.application.request.AddAccountRequest;
-import com.wazn.application.request.AddDocumentRequest;
-import com.wazn.application.request.AddMeetingScheduleRequest;
+import com.wazn.application.request.*;
 import com.wazn.application.response.*;
 import com.wazn.application.usecase.*;
 import com.wazn.application.validation.MobileValidator;
@@ -28,6 +26,9 @@ public class AccountServiceImp implements AccountService {
     private ListMeetingUseCase listMeetingUseCase;
     private GetMeetingScheduleUseCase getMeetingScheduleUseCase;
     private CheckMeetingTimeUseCase checkMeetingTimeUseCase;
+    private UpdateMeetingScheduleUseCase updateMeetingScheduleUseCase;
+    private AddAccountTypeUseCase addAccountTypeUseCase;
+    private GetAccountTypeUseCase getAccountTypeUseCase;
 
     public AccountServiceImp(AccountRepository repository) {
         this.addAccountUseCase = new AddAccountUseCaseImp(repository);
@@ -40,6 +41,9 @@ public class AccountServiceImp implements AccountService {
         this.listMeetingUseCase = new ListMeetingUseCaseImp(repository);
         this.getMeetingScheduleUseCase = new GetMeetingScheduleUseCaseImp(repository);
         this.checkMeetingTimeUseCase = new CheckMeetingTimeUseCaseImp(repository);
+        this.updateMeetingScheduleUseCase = new UpdateMeetingScheduleUseCaseImp(repository);
+        this.addAccountTypeUseCase = new AddAccountTypeUseCaseImp(repository);
+        getAccountTypeUseCase = new GetAccountTypeUseCaseImp(repository);
     }
 
     @Override
@@ -119,5 +123,29 @@ public class AccountServiceImp implements AccountService {
         if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
         if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         return checkMeetingTimeUseCase.checkMeetingTime(mobile);
+    }
+
+    @Override
+    public UpdateMeetingScheduleResponse updateMeeting(String mobile, UpdateMeetingScheduleRequest request) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        return updateMeetingScheduleUseCase.updateMeeting(mobile, request);
+    }
+
+    @Override
+    public AddAccountTypeResponse addAccountType(String mobile, AddAccountTypeRequest request) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        return addAccountTypeUseCase.addAccountType(mobile, request);
+    }
+
+    @Override
+    public GetAccountTypeResponse getAccountType(String mobile) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        return getAccountTypeUseCase.getAccountType(mobile);
     }
 }
