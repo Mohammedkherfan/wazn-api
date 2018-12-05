@@ -39,4 +39,6 @@ public class AccountGateway {
     public AddAccountTypeResponse addAccountType(String mobile, AddAccountTypeRequest request) { return service.addAccountType(mobile, request); }
 
     public GetAccountTypeResponse getAccountType(String mobile) { return service.getAccountType(mobile); }
+
+    public UploadDocumentResponse uploadDocument(String mobile, UploadDocumentRequest request) { return service.uploadDocument(mobile, request); }
 }

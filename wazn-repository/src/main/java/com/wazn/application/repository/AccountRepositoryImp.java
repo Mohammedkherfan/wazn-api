@@ -1,11 +1,9 @@
 package com.wazn.application.repository;
 
+import com.wazn.application.entity.UploadDocumentEntity;
 import com.wazn.application.exception.*;
 import com.wazn.application.mapper.*;
-import com.wazn.application.model.Account;
-import com.wazn.application.model.AccountType;
-import com.wazn.application.model.Document;
-import com.wazn.application.model.Meeting;
+import com.wazn.application.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,10 +24,14 @@ public class AccountRepositoryImp implements AccountRepository {
     @Autowired
     private AccountTypeCrudRepository accountTypeCrudRepository;
 
+    @Autowired
+    private UploadDocumentCrudRepository uploadDocumentCrudRepository;
+
     private AccountMapper accountMapper = new AccountMapperImp();
     private DocumentMapper documentMapper = new DocumentMapperImp();
     private MeetingMapper meetingMapper = new MeetingMapperImp();
     private AccountTypeMapper accountTypeMapper = new AccountTypeMapperImp();
+    private UploadDocumentMapper uploadDocumentMapper = new UploadDocumentMapperImp();
 
     @Override
     @Transactional
@@ -158,6 +160,20 @@ public class AccountRepositoryImp implements AccountRepository {
                 return accountTypeMapper.toAccountType(accountTypeCrudRepository.findById(mobile).get());
             else
                 throw new AccountNotFoundException("Account Not Found !");
+        }catch (Exception ex) {
+            throw new AccountException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public String uploadDocument(UploadDocument uploadDocument) {
+        try {
+            if (accountCrudRepository.existsById(uploadDocument.getMobile())) {
+                UploadDocumentEntity uploadDocumentEntity = uploadDocumentMapper.toUploadDocumentEntity(uploadDocument);
+                return uploadDocumentCrudRepository.save(uploadDocumentEntity).getMobile();
+            } else {
+                throw new AccountNotFoundException("Account Not Found !");
+            }
         }catch (Exception ex) {
             throw new AccountException(ex.getMessage());
         }

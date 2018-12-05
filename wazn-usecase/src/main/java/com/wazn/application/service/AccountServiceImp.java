@@ -29,6 +29,7 @@ public class AccountServiceImp implements AccountService {
     private UpdateMeetingScheduleUseCase updateMeetingScheduleUseCase;
     private AddAccountTypeUseCase addAccountTypeUseCase;
     private GetAccountTypeUseCase getAccountTypeUseCase;
+    private UploadDocumentUseCase uploadDocumentUseCase;
 
     public AccountServiceImp(AccountRepository repository) {
         this.addAccountUseCase = new AddAccountUseCaseImp(repository);
@@ -44,6 +45,7 @@ public class AccountServiceImp implements AccountService {
         this.updateMeetingScheduleUseCase = new UpdateMeetingScheduleUseCaseImp(repository);
         this.addAccountTypeUseCase = new AddAccountTypeUseCaseImp(repository);
         getAccountTypeUseCase = new GetAccountTypeUseCaseImp(repository);
+        uploadDocumentUseCase = new UploadDocumentUseCaseImp(repository);
     }
 
     @Override
@@ -147,5 +149,13 @@ public class AccountServiceImp implements AccountService {
         if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
         if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         return getAccountTypeUseCase.getAccountType(mobile);
+    }
+
+    @Override
+    public UploadDocumentResponse uploadDocument(String mobile, UploadDocumentRequest request) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        return uploadDocumentUseCase.uploadDocument(mobile, request);
     }
 }

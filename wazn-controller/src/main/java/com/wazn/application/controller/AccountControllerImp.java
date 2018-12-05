@@ -238,7 +238,7 @@ public class AccountControllerImp implements AccountController {
     @CrossOrigin()
     @ApiOperation(value = "Method to add account type new meeting.", notes = "This method used when you want to add account type meeting.")
     @ApiParam(value = "The parameter for this operation.", name = "mobile, addAccountTypeRequest")
-    public Resource<AddAccountTypeResponse> addAccountType(String mobile, AddAccountTypeRequest request) {
+    public Resource<AddAccountTypeResponse> addAccountType(@PathVariable String mobile, @RequestBody AddAccountTypeRequest request) {
         AddAccountTypeResponse addAccountTypeResponse = null;
         try {
             addAccountTypeResponse = gateway.addAccountType(mobile, request);
@@ -257,7 +257,7 @@ public class AccountControllerImp implements AccountController {
     @CrossOrigin()
     @ApiOperation(value = "Method to get account type.", notes = "This method used when you want to get account.")
     @ApiParam(value = "The parameter for this operation.", name = "mobile, getAccountTypeRequest")
-    public Resource<GetAccountTypeResponse> getAccountType(String mobile) {
+    public Resource<GetAccountTypeResponse> getAccountType(@PathVariable String mobile) {
         GetAccountTypeResponse getAccountTypeResponse = null;
         try {
             getAccountTypeResponse = gateway.getAccountType(mobile);
@@ -267,6 +267,25 @@ public class AccountControllerImp implements AccountController {
         } catch (Exception ex) {
             log.error("Class: AccountControllerImp" + ", Method: getAccountType" + ", Exception: " + ex);
             throw new MeetingScheduleException(ex.getMessage());
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/uploadDocument", method = RequestMethod.POST, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin()
+    @ApiOperation(value = "Method to create upload Document.", notes = "This method used when you want to upload Document.")
+    @ApiParam(value = "The parameter for this operation.", name = "mobile, uploadDocumentRequest")
+    public Resource<UploadDocumentResponse> uploadDocument(@PathVariable String mobile, @RequestBody  UploadDocumentRequest request) {
+        UploadDocumentResponse uploadDocumentResponse = null;
+        try {
+            uploadDocumentResponse = gateway.uploadDocument(mobile, request);
+            return hypermedia.getAccountResources(uploadDocumentResponse, "uploadDocument");
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: uploadDocument" + ", Exception: " + ex);
+            throw new AccountException(ex.getMessage());
         }
     }
 

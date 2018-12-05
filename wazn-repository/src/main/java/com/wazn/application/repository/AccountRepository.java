@@ -1,9 +1,6 @@
 package com.wazn.application.repository;
 
-import com.wazn.application.model.Account;
-import com.wazn.application.model.AccountType;
-import com.wazn.application.model.Document;
-import com.wazn.application.model.Meeting;
+import com.wazn.application.model.*;
 
 import java.util.List;
 
@@ -28,4 +25,6 @@ public interface AccountRepository {
     String addAccountType(AccountType accountType);
 
     AccountType getAccountType(String mobile);
+
+    String uploadDocument(UploadDocument uploadDocument);
 }

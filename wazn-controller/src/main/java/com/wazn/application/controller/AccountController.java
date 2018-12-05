@@ -33,4 +33,6 @@ public interface AccountController {
     Resource<AddAccountTypeResponse> addAccountType(String mobile, AddAccountTypeRequest request);
 
     Resource<GetAccountTypeResponse> getAccountType(String mobile);
+
+    Resource<UploadDocumentResponse> uploadDocument(String mobile, UploadDocumentRequest request);
 }

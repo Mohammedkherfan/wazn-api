@@ -22,6 +22,7 @@ public class AccountHypermedia {
     private static final String UPDATE_MEETING = "updateMeeting";
     private static final String ADD_ACCOUNT_TYPE = "addAccountType";
     private static final String FIND_ACCOUNT_TYPE = "findAccountType";
+    private static final String UPLOAD_DOCUMENT = "uploadDocument";
     
     public Resource getAccountResources(Object object, String operation) {
         Resource resource = null;
@@ -48,7 +49,21 @@ public class AccountHypermedia {
             resource = getAddAccountType(object);
         if (operation.equals(FIND_ACCOUNT_TYPE))
             resource = getFindAccountType(object);
+        if (operation.equals(UPLOAD_DOCUMENT))
+            resource = getUploadDocument(object);
         return resource;
+    }
+
+    private Resource getUploadDocument(Object object) {
+        Resource resource = null;
+        if (!isNull(object)) {
+            UploadDocumentResponse response = (UploadDocumentResponse) object;
+            resource = new Resource(response);
+            resource.add(linkTo(methodOn(AccountControllerImp.class).uploadDocument(response.getMobile(), new UploadDocumentRequest())).withSelfRel().withType("POST"));
+            resource = new Resource(response);
+            return resource;
+        }
+        return new Resource(new UploadDocumentResponse());
     }
 
     private Resource getFindAccountType(Object object) {

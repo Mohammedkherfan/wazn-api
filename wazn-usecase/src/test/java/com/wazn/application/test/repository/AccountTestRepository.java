@@ -1,10 +1,7 @@
 package com.wazn.application.test.repository;
 
 import com.wazn.application.exception.*;
-import com.wazn.application.model.Account;
-import com.wazn.application.model.AccountType;
-import com.wazn.application.model.Document;
-import com.wazn.application.model.Meeting;
+import com.wazn.application.model.*;
 import com.wazn.application.repository.AccountRepository;
 
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ public class AccountTestRepository implements AccountRepository  {
     private List<Document> listDocument = new ArrayList<>();
     private List<Meeting> listMeeting = new ArrayList<>();
     private List<AccountType> listAccountType = new ArrayList<>();
+    private List<UploadDocument> listUploadDocuments = new ArrayList<>();
 
     @Override
     public String addAccount(Account account) {
@@ -147,5 +145,28 @@ public class AccountTestRepository implements AccountRepository  {
                 return account;
         }
         throw new AccountNotFoundException("Account Not Found !");
+    }
+
+    @Override
+    public String uploadDocument(UploadDocument uploadDocument) {
+        Boolean check = null;
+        for (Account account : listAccount) {
+            if (account.getMobile().equals(uploadDocument.getMobile()))
+                check = Boolean.TRUE;
+            else
+                check = Boolean.FALSE;
+        }
+
+        if (check) {
+            for (UploadDocument doc : listUploadDocuments) {
+                if (doc.getMobile().equals(uploadDocument.getMobile()))
+                    throw new MeetingAlreadyExistException("Doc Already Scheduled");
+            }
+        }else {
+            throw new AccountNotFoundException("Account Not Exist");
+        }
+
+        listUploadDocuments.add(uploadDocument);
+        return uploadDocument.getMobile();
     }
 }
