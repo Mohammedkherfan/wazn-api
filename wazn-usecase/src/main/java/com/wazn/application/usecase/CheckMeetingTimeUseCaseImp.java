@@ -18,7 +18,7 @@ public class CheckMeetingTimeUseCaseImp implements CheckMeetingTimeUseCase {
     public Boolean checkMeetingTime(String mobile) {
         try {
             Meeting meeting = accountRepository.getMeeting(mobile);
-            if (LocalDateTime.now().isAfter(meeting.getStartDate()) && LocalDateTime.now().isBefore(meeting.getEndDate()))
+            if (LocalDateTime.now().isAfter(meeting.getStartDate()))
                 return Boolean.TRUE;
             else
                 return Boolean.FALSE;

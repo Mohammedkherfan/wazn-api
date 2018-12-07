@@ -35,4 +35,6 @@ public interface AccountController {
     Resource<GetAccountTypeResponse> getAccountType(String mobile);
 
     Resource<UploadDocumentResponse> uploadDocument(String mobile, UploadDocumentRequest request);
+
+    Resource<GetUploadedDocumentResponse> getUploadedDocument(String mobile);
 }

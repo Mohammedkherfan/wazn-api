@@ -276,7 +276,7 @@ public class AccountControllerImp implements AccountController {
     @CrossOrigin()
     @ApiOperation(value = "Method to create upload Document.", notes = "This method used when you want to upload Document.")
     @ApiParam(value = "The parameter for this operation.", name = "mobile, uploadDocumentRequest")
-    public Resource<UploadDocumentResponse> uploadDocument(@PathVariable String mobile, @RequestBody  UploadDocumentRequest request) {
+    public Resource<UploadDocumentResponse> uploadDocument(@PathVariable String mobile, @RequestBody UploadDocumentRequest request) {
         UploadDocumentResponse uploadDocumentResponse = null;
         try {
             uploadDocumentResponse = gateway.uploadDocument(mobile, request);
@@ -286,6 +286,25 @@ public class AccountControllerImp implements AccountController {
         } catch (Exception ex) {
             log.error("Class: AccountControllerImp" + ", Method: uploadDocument" + ", Exception: " + ex);
             throw new AccountException(ex.getMessage());
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/findUploadedDocument", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin()
+    @ApiOperation(value = "Method to get uploaded document.", notes = "This method used when you want to get uploaded document.")
+    @ApiParam(value = "The parameter for this operation.", name = "mobile")
+    public Resource<GetUploadedDocumentResponse> getUploadedDocument(@PathVariable String mobile) {
+        GetUploadedDocumentResponse getAccountTypeResponse = null;
+        try {
+            getAccountTypeResponse = gateway.getUploadedDocument(mobile);
+            return hypermedia.getAccountResources(getAccountTypeResponse, "findUploadedDocument");
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: getUploadedDocument" + ", Exception: " + ex);
+            throw new MeetingScheduleException(ex.getMessage());
         }
     }
 

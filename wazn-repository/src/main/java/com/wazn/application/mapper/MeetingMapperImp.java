@@ -10,7 +10,6 @@ public class MeetingMapperImp implements MeetingMapper {
         return new Meeting.Builder()
                 .mobile(meetingEntity.getMobile())
                 .startDate(meetingEntity.getStartDate())
-                .endDate(meetingEntity.getEndDate())
                 .note(meetingEntity.getNote())
                 .build();
     }
@@ -20,7 +19,6 @@ public class MeetingMapperImp implements MeetingMapper {
         MeetingEntity meetingEntity = new MeetingEntity();
         meetingEntity.setMobile(meeting.getMobile());
         meetingEntity.setStartDate(meeting.getStartDate());
-        meetingEntity.setEndDate(meeting.getEndDate());
         meetingEntity.setNote(meeting.getNote());
         return meetingEntity;
     }

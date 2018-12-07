@@ -169,4 +169,13 @@ public class AccountTestRepository implements AccountRepository  {
         listUploadDocuments.add(uploadDocument);
         return uploadDocument.getMobile();
     }
+
+    @Override
+    public UploadDocument getUploadedDocument(String mobile) {
+        for (UploadDocument document : listUploadDocuments) {
+            if (document.getMobile().equals(mobile))
+                return document;
+        }
+        throw new DocumentNotFoundException("Document Not Found !");
+    }
 }

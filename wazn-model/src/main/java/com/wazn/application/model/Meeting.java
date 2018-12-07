@@ -8,14 +8,12 @@ public class Meeting {
 
     private String mobile;
     private LocalDateTime startDate;
-    private LocalDateTime endDate;
     private String note;
 
-    public Meeting(String mobile, LocalDateTime startDate, LocalDateTime endDate,String note) {
-        new Validator(mobile, startDate, endDate);
+    public Meeting(String mobile, LocalDateTime startDate,String note) {
+        new Validator(mobile, startDate);
         this.mobile = mobile;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.note = note;
     }
 
@@ -27,10 +25,6 @@ public class Meeting {
         return startDate;
     }
 
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
-
     public String getNote() {
         return note;
     }
@@ -39,7 +33,6 @@ public class Meeting {
 
         private String mobile;
         private LocalDateTime startDate;
-        private LocalDateTime endDate;
         private String note;
 
         public Builder mobile(String mobile) {
@@ -52,18 +45,13 @@ public class Meeting {
             return this;
         }
 
-        public Builder endDate(LocalDateTime endDate) {
-            this.endDate = endDate;
-            return this;
-        }
-
         public Builder note(String  note) {
             this.note = note;
             return this;
         }
 
         public Meeting build() {
-            return new Meeting(mobile, startDate, endDate, note);
+            return new Meeting(mobile, startDate, note);
         }
     }
 }

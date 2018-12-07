@@ -49,12 +49,10 @@ public class Validator {
         this.confirmPasswordValidation.validate(confirmPassword);
     }
 
-    public Validator(String mobile, LocalDateTime startDate, LocalDateTime endDate) {
+    public Validator(String mobile, LocalDateTime startDate) {
         this.mobileValidation.validate(mobile);
         this.mobilePatternValidation.validate(mobile);
         this.startDateValidation.validate(startDate);
-        this.endDateValidation.validate(endDate);
-        this.meetingTimeValidation(startDate, endDate);
     }
 
     private void meetingTimeValidation(LocalDateTime startDate, LocalDateTime endDate) {

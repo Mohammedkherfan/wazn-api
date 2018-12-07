@@ -75,7 +75,7 @@ public class TestAccountController {
 
     @Test
     public void whenAddMeeting_ThenReturnMeetingThatAdded() throws Exception {
-        mockMvc.perform(post("/wazn/accounts/+962798988910/addMeeting").content(asJsonString(new AddMeetingScheduleRequest(LocalDateTime.now().plusDays(1).toString(), LocalDateTime.now().plusDays(1).toString(), "note"))).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+        mockMvc.perform(post("/wazn/accounts/+962798988910/addMeeting").content(asJsonString(new AddMeetingScheduleRequest(LocalDateTime.now().plusDays(1).toString(), "note"))).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
     }
 
     @Test

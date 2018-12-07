@@ -178,4 +178,16 @@ public class AccountRepositoryImp implements AccountRepository {
             throw new AccountException(ex.getMessage());
         }
     }
+
+    @Override
+    public UploadDocument getUploadedDocument(String mobile) {
+        try {
+            if (uploadDocumentCrudRepository.existsById(mobile))
+                return uploadDocumentMapper.toUploadDocument(uploadDocumentCrudRepository.findById(mobile).get());
+            else
+                return null;
+        }catch (Exception ex) {
+            throw new AccountException(ex.getMessage());
+        }
+    }
 }

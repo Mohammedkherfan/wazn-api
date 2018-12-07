@@ -6,16 +6,14 @@ public class GetMeetingScheduleResponse {
 
     private String mobile;
     private LocalDateTime startDate;
-    private LocalDateTime endDate;
     private String note;
 
     public GetMeetingScheduleResponse() {
     }
 
-    public GetMeetingScheduleResponse(String mobile, LocalDateTime startDate, LocalDateTime endDate, String note) {
+    public GetMeetingScheduleResponse(String mobile, LocalDateTime startDate, String note) {
         this.mobile = mobile;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.note = note;
     }
 
@@ -33,14 +31,6 @@ public class GetMeetingScheduleResponse {
 
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
-    }
-
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
     }
 
     public String getNote() {

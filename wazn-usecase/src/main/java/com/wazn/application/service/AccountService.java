@@ -34,4 +34,6 @@ public interface AccountService {
     GetAccountTypeResponse getAccountType(String mobile);
 
     UploadDocumentResponse uploadDocument(String mobile, UploadDocumentRequest request);
+
+    GetUploadedDocumentResponse getUploadedDocument(String mobile);
 }

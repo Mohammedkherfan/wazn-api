@@ -30,6 +30,7 @@ public class AccountServiceImp implements AccountService {
     private AddAccountTypeUseCase addAccountTypeUseCase;
     private GetAccountTypeUseCase getAccountTypeUseCase;
     private UploadDocumentUseCase uploadDocumentUseCase;
+    private GetUploadedDocumentUseCase getUploadedDocumentUseCase;
 
     public AccountServiceImp(AccountRepository repository) {
         this.addAccountUseCase = new AddAccountUseCaseImp(repository);
@@ -44,8 +45,9 @@ public class AccountServiceImp implements AccountService {
         this.checkMeetingTimeUseCase = new CheckMeetingTimeUseCaseImp(repository);
         this.updateMeetingScheduleUseCase = new UpdateMeetingScheduleUseCaseImp(repository);
         this.addAccountTypeUseCase = new AddAccountTypeUseCaseImp(repository);
-        getAccountTypeUseCase = new GetAccountTypeUseCaseImp(repository);
-        uploadDocumentUseCase = new UploadDocumentUseCaseImp(repository);
+        this.getAccountTypeUseCase = new GetAccountTypeUseCaseImp(repository);
+        this.uploadDocumentUseCase = new UploadDocumentUseCaseImp(repository);
+        this.getUploadedDocumentUseCase = new GetUploadedDocumentUseCaseImp(repository);
     }
 
     @Override
@@ -132,6 +134,7 @@ public class AccountServiceImp implements AccountService {
         MobileValidator mobileValidator = new MobileValidator();
         if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
         if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(request)) throw new InvalidAccountRequestException("Invalid Request");
         return updateMeetingScheduleUseCase.updateMeeting(mobile, request);
     }
 
@@ -140,6 +143,7 @@ public class AccountServiceImp implements AccountService {
         MobileValidator mobileValidator = new MobileValidator();
         if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
         if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(request)) throw new InvalidAccountRequestException("Invalid Request");
         return addAccountTypeUseCase.addAccountType(mobile, request);
     }
 
@@ -156,6 +160,15 @@ public class AccountServiceImp implements AccountService {
         MobileValidator mobileValidator = new MobileValidator();
         if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
         if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(request)) throw new InvalidAccountRequestException("Invalid Request");
         return uploadDocumentUseCase.uploadDocument(mobile, request);
+    }
+
+    @Override
+    public GetUploadedDocumentResponse getUploadedDocument(String mobile) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        return getUploadedDocumentUseCase.getUploadedDocument(mobile);
     }
 }

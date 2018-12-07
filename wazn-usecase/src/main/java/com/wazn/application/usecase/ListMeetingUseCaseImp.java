@@ -20,7 +20,7 @@ public class ListMeetingUseCaseImp implements ListMeetingUseCase {
         try {
             List<ListMeetingResponse> list = new ArrayList<>();
             accountRepository.listMeeting().forEach(e -> {
-                list.add(new ListMeetingResponse(e.getMobile(), e.getStartDate(), e.getEndDate(), e.getNote()));
+                list.add(new ListMeetingResponse(e.getMobile(), e.getStartDate(), e.getNote()));
             });
             return list;
         }catch (Exception ex) {

@@ -27,4 +27,6 @@ public interface AccountRepository {
     AccountType getAccountType(String mobile);
 
     String uploadDocument(UploadDocument uploadDocument);
+
+    UploadDocument getUploadedDocument(String mobile);
 }

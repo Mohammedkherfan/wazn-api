@@ -24,7 +24,6 @@ public class UpdateMeetingScheduleUseCaseImp implements UpdateMeetingScheduleUse
             Meeting meeting = new Meeting.Builder()
                     .mobile(mobile)
                     .startDate(LocalDateTime.parse(request.getStartDate(), formatter))
-                    .endDate(LocalDateTime.parse(request.getEndDate(), formatter))
                     .note(request.getNote())
                     .build();
             return new UpdateMeetingScheduleResponse(accountRepository.updateMeeting(meeting));
