@@ -23,6 +23,7 @@ public class UploadDocumentUseCaseImp implements UploadDocumentUseCase {
             UploadDocument document = repository.getUploadedDocument(mobile);
             if (isNull(document)) {
                 uploadDocument = new UploadDocument.Builder()
+                        .mobile(mobile)
                         .passportOrVisaImage(request.getPassportOrVisaImage())
                         .taxDeclarationImage(request.getTaxDeclarationImage())
                         .salaryCertificateImage(request.getSalaryCertificateImage())
