@@ -13,13 +13,13 @@ public class UploadDocumentEntity {
     @Column(name = "MOBILE", nullable = false, unique = true)
     private String mobile;
 
-    @Column(name = "PASSPORT_IMG", nullable = true, length = 1000000)
+    @Column(name = "PASSPORT_IMG", nullable = true, length = 1000000000)
     private byte[] passportOrVisaImage;
 
-    @Column(name = "SALARY_CER_IMG", nullable = true, length = 1000000)
+    @Column(name = "SALARY_CER_IMG", nullable = true, length = 1000000000)
     private byte[] salaryCertificateImage;
 
-    @Column(name = "TAX_IMG", nullable = true, length = 1000000)
+    @Column(name = "TAX_IMG", nullable = true, length = 100000000)
     private byte[] taxDeclarationImage;
 
     public UploadDocumentEntity() {
