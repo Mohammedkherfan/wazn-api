@@ -27,6 +27,7 @@ public class AddAccountUseCaseImp implements AddAccountUseCase {
                     .verificationCode(Encode.encode(VerificationCode.generateVerificationCode()))
                     .password(Encode.encode(request.getPassword()))
                     .confirmPassword(Encode.encode(request.getConfirmPassword()))
+                    .status(0)
                     .build();
             if (isPasswordMatch(account))
                 accountRepository.addAccount(account);

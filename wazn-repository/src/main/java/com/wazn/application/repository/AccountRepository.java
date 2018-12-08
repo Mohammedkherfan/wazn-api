@@ -29,4 +29,8 @@ public interface AccountRepository {
     String uploadDocument(UploadDocument uploadDocument);
 
     UploadDocument getUploadedDocument(String mobile);
+
+    List<AllData> getAllData();
+
+    AllData getAllData(String mobile);
 }

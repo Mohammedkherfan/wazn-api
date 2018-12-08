@@ -291,7 +291,7 @@ public class AccountControllerImp implements AccountController {
 
     @Override
     @RequestMapping(value = "/{mobile}/findUploadedDocument", method = RequestMethod.GET, produces = {"application/hal+json"})
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @CrossOrigin()
     @ApiOperation(value = "Method to get uploaded document.", notes = "This method used when you want to get uploaded document.")
     @ApiParam(value = "The parameter for this operation.", name = "mobile")
@@ -305,6 +305,42 @@ public class AccountControllerImp implements AccountController {
         } catch (Exception ex) {
             log.error("Class: AccountControllerImp" + ", Method: getUploadedDocument" + ", Exception: " + ex);
             throw new MeetingScheduleException(ex.getMessage());
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin()
+    public List<Resource<GetAllDataResponse>> getAllData() {
+        List<Resource<GetAllDataResponse>> list = new ArrayList<>();
+        try {
+            gateway.getAllData().forEach(e -> {
+                list.add(hypermedia.getAccountResources(e, "all"));
+            });
+            return list;
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: getAllData" + ", Exception: " + ex);
+            throw new MeetingScheduleException(ex.getMessage());
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/all", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin()
+    public Resource<GetAllDataResponse> getAllData(@PathVariable String mobile) {
+        GetAllDataResponse allDataResponse = null;
+        try {
+            allDataResponse = gateway.getAllData(mobile);
+            return hypermedia.getAccountResources(allDataResponse, "all");
+        } catch (AccountException ex) {
+            return hypermedia.getAccountResources(new GetAllDataResponse(), "all");
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: getAllData" + ", Exception: " + ex);
+            return hypermedia.getAccountResources(new GetAllDataResponse(), "all");
         }
     }
 

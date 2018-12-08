@@ -1,9 +1,6 @@
 package com.wazn.application.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "WAZN_UPLOAD_DOCUMENT")
@@ -22,6 +19,10 @@ public class UploadDocumentEntity {
     @Column(name = "TAX_IMG", nullable = true, length = 100000000)
     private byte[] taxDeclarationImage;
 
+    @OneToOne
+    @JoinColumn(name = "MOBILE")
+    private AccountEntity accountEntity;
+
     public UploadDocumentEntity() {
     }
 
@@ -30,6 +31,14 @@ public class UploadDocumentEntity {
         this.passportOrVisaImage = passportOrVisaImage;
         this.salaryCertificateImage = salaryCertificateImage;
         this.taxDeclarationImage = taxDeclarationImage;
+    }
+
+    public AccountEntity getAccountEntity() {
+        return accountEntity;
+    }
+
+    public void setAccountEntity(AccountEntity accountEntity) {
+        this.accountEntity = accountEntity;
     }
 
     public String getMobile() {

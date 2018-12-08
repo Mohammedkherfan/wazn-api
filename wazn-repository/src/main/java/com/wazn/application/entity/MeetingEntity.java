@@ -1,9 +1,6 @@
 package com.wazn.application.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -20,6 +17,10 @@ public class MeetingEntity {
 
     @Column(name = "NOTE", nullable = false)
     private String note;
+
+    @OneToOne
+    @JoinColumn(name = "MOBILE")
+    private AccountEntity accountEntity;
 
     public MeetingEntity() {
     }
@@ -52,5 +53,13 @@ public class MeetingEntity {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public AccountEntity getAccountEntity() {
+        return accountEntity;
+    }
+
+    public void setAccountEntity(AccountEntity accountEntity) {
+        this.accountEntity = accountEntity;
     }
 }

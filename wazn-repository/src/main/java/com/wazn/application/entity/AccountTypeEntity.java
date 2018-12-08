@@ -10,8 +10,12 @@ public class AccountTypeEntity {
     @Column(name = "MOBILE", nullable = false, unique = true)
     private String mobile;
 
-    @Column(name = "ACCOUNT_TYPE", nullable = false)
+    @Column(name = "ACCOUNT_TYPE", nullable = true)
     private Integer type;
+
+    @OneToOne
+    @JoinColumn(name = "MOBILE")
+    private AccountEntity accountEntity;
 
     public AccountTypeEntity() {
     }
@@ -35,5 +39,13 @@ public class AccountTypeEntity {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public AccountEntity getAccountEntity() {
+        return accountEntity;
+    }
+
+    public void setAccountEntity(AccountEntity accountEntity) {
+        this.accountEntity = accountEntity;
     }
 }

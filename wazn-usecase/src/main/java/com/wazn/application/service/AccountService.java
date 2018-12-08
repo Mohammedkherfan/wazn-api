@@ -36,4 +36,8 @@ public interface AccountService {
     UploadDocumentResponse uploadDocument(String mobile, UploadDocumentRequest request);
 
     GetUploadedDocumentResponse getUploadedDocument(String mobile);
+
+    List<GetAllDataResponse> getAllData();
+
+    GetAllDataResponse getAllData(String mobile);
 }

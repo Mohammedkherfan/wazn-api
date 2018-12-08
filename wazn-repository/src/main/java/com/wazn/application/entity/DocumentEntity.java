@@ -53,6 +53,10 @@ public class DocumentEntity {
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "documentEntity", cascade = CascadeType.ALL)
     private ResultEntity resultEntity;
 
+    @OneToOne
+    @JoinColumn(name = "MOBILE")
+    private AccountEntity accountEntity;
+
     public DocumentEntity() {
     }
 
@@ -72,6 +76,14 @@ public class DocumentEntity {
         this.accountImageEntity = accountImageEntity;
         this.reportEntity = reportEntity;
         this.resultEntity = resultEntity;
+    }
+
+    public AccountEntity getAccountEntity() {
+        return accountEntity;
+    }
+
+    public void setAccountEntity(AccountEntity accountEntity) {
+        this.accountEntity = accountEntity;
     }
 
     public String getMobile() {

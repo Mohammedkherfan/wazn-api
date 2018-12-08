@@ -31,6 +31,7 @@ public class AccountServiceImp implements AccountService {
     private GetAccountTypeUseCase getAccountTypeUseCase;
     private UploadDocumentUseCase uploadDocumentUseCase;
     private GetUploadedDocumentUseCase getUploadedDocumentUseCase;
+    private GetAllDataUseCase getAllDataUseCase;
 
     public AccountServiceImp(AccountRepository repository) {
         this.addAccountUseCase = new AddAccountUseCaseImp(repository);
@@ -48,6 +49,7 @@ public class AccountServiceImp implements AccountService {
         this.getAccountTypeUseCase = new GetAccountTypeUseCaseImp(repository);
         this.uploadDocumentUseCase = new UploadDocumentUseCaseImp(repository);
         this.getUploadedDocumentUseCase = new GetUploadedDocumentUseCaseImp(repository);
+        this.getAllDataUseCase = new GetAllDataUseCaseImp(repository);
     }
 
     @Override
@@ -170,5 +172,18 @@ public class AccountServiceImp implements AccountService {
         if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
         if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         return getUploadedDocumentUseCase.getUploadedDocument(mobile);
+    }
+
+    @Override
+    public List<GetAllDataResponse> getAllData() {
+        return getAllDataUseCase.getAllData();
+    }
+
+    @Override
+    public GetAllDataResponse getAllData(String mobile) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        return getAllDataUseCase.getAllData(mobile);
     }
 }

@@ -11,8 +11,9 @@ public class Account {
     private String password;
     private String confirmPassword;
     private AccountType accountType;
+    private Integer status;
 
-    public Account(String email, String mobile, String fullName, String verificationCode, String password, String confirmPassword, AccountType accountType) {
+    public Account(String email, String mobile, String fullName, String verificationCode, String password, String confirmPassword, AccountType accountType, Integer status) {
         new Validator(email, mobile, fullName, password, confirmPassword);
         this.email = email;
         this.mobile = mobile;
@@ -21,6 +22,7 @@ public class Account {
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.accountType = accountType;
+        this.status = status;
     }
 
     public String getEmail() {
@@ -51,6 +53,10 @@ public class Account {
         return accountType;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
     public static class Builder {
 
         private String email;
@@ -60,6 +66,7 @@ public class Account {
         private String password;
         private String confirmPassword;
         private AccountType accountType;
+        private Integer status;
 
         public Builder email(String email) {
             this.email = email;
@@ -96,8 +103,12 @@ public class Account {
             return this;
         }
 
+        public Builder status(Integer status) {
+            this.status = status;
+            return this;
+        }
         public Account build() {
-            return new Account(email, mobile, fullName, verificationCode, password, confirmPassword, accountType);
+            return new Account(email, mobile, fullName, verificationCode, password, confirmPassword, accountType, status);
         }
     }
 }

@@ -178,4 +178,14 @@ public class AccountTestRepository implements AccountRepository  {
         }
         throw new DocumentNotFoundException("Document Not Found !");
     }
+
+    @Override
+    public List<AllData> getAllData() {
+        return null;
+    }
+
+    @Override
+    public AllData getAllData(String mobile) {
+        return null;
+    }
 }

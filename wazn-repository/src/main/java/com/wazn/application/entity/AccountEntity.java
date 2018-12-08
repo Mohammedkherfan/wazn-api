@@ -1,9 +1,6 @@
 package com.wazn.application.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -26,15 +23,35 @@ public class AccountEntity implements Serializable {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
+    @Column(name = "STATUS", nullable = false)
+    private Integer status;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "accountEntity", cascade = CascadeType.ALL)
+    private AccountTypeEntity accountTypeEntity;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "accountEntity", cascade = CascadeType.ALL)
+    private DocumentEntity documentEntity;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "accountEntity", cascade = CascadeType.ALL)
+    private MeetingEntity meetingEntity;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "accountEntity", cascade = CascadeType.ALL)
+    private UploadDocumentEntity uploadDocumentEntity;
+
     public AccountEntity() {
     }
 
-    public AccountEntity(String mobile, String email, String name, String verificationCode, String password) {
+    public AccountEntity(String mobile, String email, String name, String verificationCode, String password, Integer status, AccountTypeEntity accountTypeEntity, DocumentEntity documentEntity, MeetingEntity meetingEntity, UploadDocumentEntity uploadDocumentEntity) {
         this.mobile = mobile;
         this.email = email;
         this.name = name;
+        this.status = status;
         this.verificationCode = verificationCode;
         this.password = password;
+        this.accountTypeEntity = accountTypeEntity;
+        this.documentEntity = documentEntity;
+        this.meetingEntity = meetingEntity;
+        this.uploadDocumentEntity = uploadDocumentEntity;
     }
 
     public String getMobile() {
@@ -77,4 +94,43 @@ public class AccountEntity implements Serializable {
         this.password = password;
     }
 
+    public AccountTypeEntity getAccountTypeEntity() {
+        return accountTypeEntity;
+    }
+
+    public void setAccountTypeEntity(AccountTypeEntity accountTypeEntity) {
+        this.accountTypeEntity = accountTypeEntity;
+    }
+
+    public DocumentEntity getDocumentEntity() {
+        return documentEntity;
+    }
+
+    public void setDocumentEntity(DocumentEntity documentEntity) {
+        this.documentEntity = documentEntity;
+    }
+
+    public MeetingEntity getMeetingEntity() {
+        return meetingEntity;
+    }
+
+    public void setMeetingEntity(MeetingEntity meetingEntity) {
+        this.meetingEntity = meetingEntity;
+    }
+
+    public UploadDocumentEntity getUploadDocumentEntity() {
+        return uploadDocumentEntity;
+    }
+
+    public void setUploadDocumentEntity(UploadDocumentEntity uploadDocumentEntity) {
+        this.uploadDocumentEntity = uploadDocumentEntity;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

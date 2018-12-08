@@ -2,7 +2,6 @@ package com.wazn.application.mapper;
 
 import com.wazn.application.entity.AccountEntity;
 import com.wazn.application.model.Account;
-import com.wazn.application.model.AccountType;
 
 public class AccountMapperImp implements AccountMapper {
 
@@ -15,6 +14,7 @@ public class AccountMapperImp implements AccountMapper {
                 .verificationCode(accountEntity.getVerificationCode())
                 .password(accountEntity.getPassword())
                 .confirmPassword(accountEntity.getPassword())
+                .status(accountEntity.getStatus())
                 .build();
     }
 
@@ -26,6 +26,7 @@ public class AccountMapperImp implements AccountMapper {
         accountEntity.setName(account.getFullName());
         accountEntity.setVerificationCode(account.getVerificationCode());
         accountEntity.setPassword(account.getPassword());
+        accountEntity.setStatus(account.getStatus());
         return accountEntity;
     }
 

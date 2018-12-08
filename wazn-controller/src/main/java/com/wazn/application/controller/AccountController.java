@@ -37,4 +37,8 @@ public interface AccountController {
     Resource<UploadDocumentResponse> uploadDocument(String mobile, UploadDocumentRequest request);
 
     Resource<GetUploadedDocumentResponse> getUploadedDocument(String mobile);
+
+    List<Resource<GetAllDataResponse>> getAllData();
+
+    Resource<GetAllDataResponse> getAllData(String mobile);
 }
