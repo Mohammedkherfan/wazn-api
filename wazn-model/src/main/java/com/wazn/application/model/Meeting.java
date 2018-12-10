@@ -17,6 +17,12 @@ public class Meeting {
         this.note = note;
     }
 
+    public Meeting(String mobile,String note , LocalDateTime startDate) {
+        this.mobile = mobile;
+        this.startDate = startDate;
+        this.note = note;
+    }
+
     public String getMobile() {
         return mobile;
     }
@@ -52,6 +58,10 @@ public class Meeting {
 
         public Meeting build() {
             return new Meeting(mobile, startDate, note);
+        }
+
+        public Meeting getBuild() {
+            return new Meeting(mobile, note, startDate);
         }
     }
 }

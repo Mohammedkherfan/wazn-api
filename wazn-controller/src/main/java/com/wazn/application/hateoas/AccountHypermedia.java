@@ -1,6 +1,7 @@
 package com.wazn.application.hateoas;
 
 import com.wazn.application.controller.AccountControllerImp;
+import com.wazn.application.controller.UserControllerImp;
 import com.wazn.application.request.*;
 import com.wazn.application.response.*;
 import org.springframework.hateoas.Resource;
@@ -25,6 +26,9 @@ public class AccountHypermedia {
     private static final String UPLOAD_DOCUMENT = "uploadDocument";
     private static final String FIND_UPLOADED_DOC = "findUploadedDocument";
     private static final String ALL = "all";
+    private static final String ADD_USER = "addUser";
+    private static final String LIST_USER = "listUsers";
+    private static final String UPDATE_USER = "updateUser";
     
     public Resource getAccountResources(Object object, String operation) {
         Resource resource = null;
@@ -57,7 +61,49 @@ public class AccountHypermedia {
             resource = getfindUploadedDocument(object);
         if (operation.equals(ALL))
             resource = getAllData(object);
+        if (operation.equals(ADD_USER))
+            resource = getAddUser(object);
+        if (operation.equals(LIST_USER))
+            resource = getListUser(object);
+        if (operation.equals(UPDATE_USER))
+            resource = getUpdateUser(object);
         return resource;
+    }
+
+    private Resource getUpdateUser(Object object) {
+        Resource resource = null;
+        if (!isNull(object)) {
+            UpdateUserResponse response = (UpdateUserResponse) object;
+            resource = new Resource(response);
+            resource.add(linkTo(methodOn(UserControllerImp.class).updateUser(response.getUserName(), new UpdateUserRequest())).withSelfRel().withType("PUT"));
+            resource = new Resource(response);
+            return resource;
+        }
+        return new Resource(new UpdateUserResponse());
+    }
+
+    private Resource getListUser(Object object) {
+        Resource resource = null;
+        if (!isNull(object)) {
+            ListUserResponse response = (ListUserResponse) object;
+            resource = new Resource(response);
+            resource.add(linkTo(methodOn(UserControllerImp.class).listUser()).withSelfRel().withType("GET"));
+            resource = new Resource(response);
+            return resource;
+        }
+        return new Resource(new ListUserResponse());
+    }
+
+    private Resource getAddUser(Object object) {
+        Resource resource = null;
+        if (!isNull(object)) {
+            AddUserResponse response = (AddUserResponse) object;
+            resource = new Resource(response);
+            resource.add(linkTo(methodOn(UserControllerImp.class).addUser(new AddUserRequest())).withSelfRel().withType("POST"));
+            resource = new Resource(response);
+            return resource;
+        }
+        return new Resource(new AddUserResponse());
     }
 
     private Resource getAllData(Object object) {

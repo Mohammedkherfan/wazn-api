@@ -9,9 +9,9 @@ public class MeetingMapperImp implements MeetingMapper {
     public Meeting toMeeting(MeetingEntity meetingEntity) {
         return new Meeting.Builder()
                 .mobile(meetingEntity.getMobile())
-                .startDate(meetingEntity.getStartDate())
                 .note(meetingEntity.getNote())
-                .build();
+                .startDate(meetingEntity.getStartDate())
+                .getBuild();
     }
 
     @Override
