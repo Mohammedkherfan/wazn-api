@@ -105,6 +105,16 @@ public class GetAllDataUseCaseImp implements GetAllDataUseCase {
         }
     }
 
+    @Override
+    public void updateStatus(String mobile, String status) {
+        repository.updateStatus(mobile, Integer.parseInt(status));
+    }
+
+    @Override
+    public void saveComment(String mobile, String comment) {
+        repository.saveComment(mobile, comment);
+    }
+
     private String getAccountType(Integer type) {
         if (isNull(type))
             return null;
@@ -123,6 +133,8 @@ public class GetAllDataUseCaseImp implements GetAllDataUseCase {
                 return "Approved";
             if (status == 2)
                 return "Pending Call";
+            if (status == 3)
+                return "Reject";
             return "";
 
         }

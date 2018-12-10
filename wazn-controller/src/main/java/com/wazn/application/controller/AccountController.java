@@ -41,4 +41,8 @@ public interface AccountController {
     List<Resource<GetAllDataResponse>> getAllData();
 
     Resource<GetAllDataResponse> getAllData(String mobile);
+
+    void saveComment(String mobile, String comment);
+
+    void updateStatus(String mobile, String status);
 }

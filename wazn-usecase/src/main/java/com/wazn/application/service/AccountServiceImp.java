@@ -186,4 +186,22 @@ public class AccountServiceImp implements AccountService {
         if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         return getAllDataUseCase.getAllData(mobile);
     }
+
+    @Override
+    public void updateStatus(String mobile, String status) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(status) || status.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Status");
+        getAllDataUseCase.updateStatus(mobile, status);
+    }
+
+    @Override
+    public void saveComment(String mobile, String comment) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(comment) || comment.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Comment");
+        getAllDataUseCase.saveComment(mobile, comment);
+    }
 }

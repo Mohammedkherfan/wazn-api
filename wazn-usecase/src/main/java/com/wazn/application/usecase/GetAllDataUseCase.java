@@ -10,4 +10,7 @@ public interface GetAllDataUseCase {
 
     GetAllDataResponse getAllData(String mobile);
 
+    void updateStatus(String mobile, String status);
+
+    void saveComment(String mobile, String comment);
 }

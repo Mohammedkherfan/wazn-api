@@ -33,4 +33,8 @@ public interface AccountRepository {
     List<AllData> getAllData();
 
     AllData getAllData(String mobile);
+
+    void updateStatus(String mobile, Integer status);
+
+    void saveComment(String mobile, String comment);
 }

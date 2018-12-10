@@ -344,4 +344,34 @@ public class AccountControllerImp implements AccountController {
         }
     }
 
+    @Override
+    @RequestMapping(value = "/{mobile}/{comment}/save", method = RequestMethod.PUT, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin()
+    public void saveComment(@PathVariable String mobile, @PathVariable String comment) {
+        try {
+            gateway.saveComment(mobile, comment);
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: saveComment" + ", Exception: " + ex);
+            throw new AccountException(ex.getMessage());
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/{status}/status", method = RequestMethod.PUT, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin()
+    public void updateStatus(@PathVariable String mobile, @PathVariable String status) {
+        try {
+            gateway.updateStatus(mobile, status);
+        } catch (AccountException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: AccountControllerImp" + ", Method: updateStatus" + ", Exception: " + ex);
+            throw new AccountException(ex.getMessage());
+        }
+    }
+
 }

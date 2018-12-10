@@ -40,4 +40,8 @@ public interface AccountService {
     List<GetAllDataResponse> getAllData();
 
     GetAllDataResponse getAllData(String mobile);
+
+    void updateStatus(String mobile, String status);
+
+    void saveComment(String mobile, String comment);
 }

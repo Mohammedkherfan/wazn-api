@@ -188,4 +188,15 @@ public class AccountTestRepository implements AccountRepository  {
     public AllData getAllData(String mobile) {
         return null;
     }
+
+    @Override
+    public void updateStatus(String mobile, Integer status) {
+
+    }
+
+    @Override
+    public void saveComment(String mobile, String comment) {
+
+    }
+
 }

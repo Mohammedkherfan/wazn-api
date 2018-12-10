@@ -1,6 +1,7 @@
 package com.wazn.application.repository;
 
 import com.wazn.application.entity.AccountEntity;
+import com.wazn.application.entity.DocumentEntity;
 import com.wazn.application.entity.UploadDocumentEntity;
 import com.wazn.application.exception.*;
 import com.wazn.application.mapper.*;
@@ -280,5 +281,27 @@ public class AccountRepositoryImp implements AccountRepository {
             allData = new AllData.Builder().build();
         }
         return allData;
+    }
+
+    @Override
+    public void updateStatus(String mobile, Integer status) {
+        try {
+            AccountEntity accountEntity = accountCrudRepository.findById(mobile).get();
+            accountEntity.setStatus(status);
+            accountCrudRepository.save(accountEntity);
+        }catch (Exception ex) {
+            throw new AccountException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void saveComment(String mobile, String comment) {
+        try {
+            DocumentEntity documentEntity = documentCrudRepository.findById(mobile).get();
+            documentEntity.setHelpDeskComment(comment);
+            documentCrudRepository.save(documentEntity);
+        }catch (Exception ex) {
+            throw new AccountException(ex.getMessage());
+        }
     }
 }

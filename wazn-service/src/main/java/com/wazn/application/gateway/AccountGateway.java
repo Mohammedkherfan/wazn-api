@@ -51,5 +51,13 @@ public class AccountGateway {
     public GetAllDataResponse getAllData(String mobile) {
         return service.getAllData(mobile);
     }
+
+    public void updateStatus(String mobile, String status) {
+        service.updateStatus(mobile, status);
+    }
+
+    public void saveComment(String mobile, String comment) {
+        service.saveComment(mobile, comment);
+    }
 }
 
