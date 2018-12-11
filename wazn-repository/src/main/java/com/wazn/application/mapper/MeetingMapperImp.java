@@ -11,6 +11,7 @@ public class MeetingMapperImp implements MeetingMapper {
                 .mobile(meetingEntity.getMobile())
                 .note(meetingEntity.getNote())
                 .startDate(meetingEntity.getStartDate())
+                .status(meetingEntity.getStatus())
                 .getBuild();
     }
 
@@ -20,6 +21,7 @@ public class MeetingMapperImp implements MeetingMapper {
         meetingEntity.setMobile(meeting.getMobile());
         meetingEntity.setStartDate(meeting.getStartDate());
         meetingEntity.setNote(meeting.getNote());
+        meetingEntity.setStatus(meeting.getStatus());
         return meetingEntity;
     }
 }

@@ -25,6 +25,7 @@ public class AddMeetingScheduleUseCaseImp implements AddMeetingScheduleUseCase {
                     .mobile(mobile)
                     .startDate(LocalDateTime.parse(request.getStartDate(), formatter))
                     .note(request.getNote())
+                    .status(0)
                     .build();
             return new AddMeetingScheduleResponse(accountRepository.addMeeting(meeting));
         }catch (Exception ex) {

@@ -71,7 +71,7 @@ public class UserControllerImp implements UserController {
     }
 
     @Override
-    @RequestMapping(value = "/{userName}/updateUser", method = RequestMethod.PUT, produces = {"application/hal+json"})
+    @RequestMapping(value = "/{userName}/updateUser", method = RequestMethod.POST, produces = {"application/hal+json"})
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin()
     @ApiOperation(value = "Method to update user.", notes = "This method used when you want to update user.")

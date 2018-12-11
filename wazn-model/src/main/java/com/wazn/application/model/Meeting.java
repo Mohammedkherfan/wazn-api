@@ -9,18 +9,21 @@ public class Meeting {
     private String mobile;
     private LocalDateTime startDate;
     private String note;
+    private Integer status;
 
-    public Meeting(String mobile, LocalDateTime startDate,String note) {
+    public Meeting(String mobile, LocalDateTime startDate,String note, Integer status) {
         new Validator(mobile, startDate);
         this.mobile = mobile;
         this.startDate = startDate;
         this.note = note;
+        this.status = status;
     }
 
-    public Meeting(String mobile,String note , LocalDateTime startDate) {
+    public Meeting(String mobile,String note , LocalDateTime startDate, Integer status) {
         this.mobile = mobile;
         this.startDate = startDate;
         this.note = note;
+        this.status = status;
     }
 
     public String getMobile() {
@@ -35,11 +38,16 @@ public class Meeting {
         return note;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
     public static class Builder {
 
         private String mobile;
         private LocalDateTime startDate;
         private String note;
+        private Integer status;
 
         public Builder mobile(String mobile) {
             this.mobile = mobile;
@@ -56,12 +64,17 @@ public class Meeting {
             return this;
         }
 
+        public Builder status(Integer status) {
+            this.status = status;
+            return this;
+        }
+
         public Meeting build() {
-            return new Meeting(mobile, startDate, note);
+            return new Meeting(mobile, startDate, note, status);
         }
 
         public Meeting getBuild() {
-            return new Meeting(mobile, note, startDate);
+            return new Meeting(mobile, note, startDate, status);
         }
     }
 }

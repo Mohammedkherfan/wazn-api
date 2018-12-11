@@ -18,6 +18,9 @@ public class MeetingEntity {
     @Column(name = "NOTE", nullable = false)
     private String note;
 
+    @Column(name = "STATUS", nullable = false)
+    private Integer status;
+
     @OneToOne
     @JoinColumn(name = "MOBILE")
     private AccountEntity accountEntity;
@@ -25,10 +28,11 @@ public class MeetingEntity {
     public MeetingEntity() {
     }
 
-    public MeetingEntity(String mobile, LocalDateTime startDate, String note) {
+    public MeetingEntity(String mobile, LocalDateTime startDate, String note, Integer status) {
         this.mobile = mobile;
         this.startDate = startDate;
         this.note = note;
+        this.status = status;
     }
 
     public String getMobile() {
@@ -61,5 +65,13 @@ public class MeetingEntity {
 
     public void setAccountEntity(AccountEntity accountEntity) {
         this.accountEntity = accountEntity;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
