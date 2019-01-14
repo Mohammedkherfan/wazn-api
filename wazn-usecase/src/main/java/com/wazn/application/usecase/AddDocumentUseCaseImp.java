@@ -11,6 +11,7 @@ import com.wazn.application.response.AddDocumentResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class AddDocumentUseCaseImp implements AddDocumentUseCase {
 
@@ -31,6 +32,7 @@ public class AddDocumentUseCaseImp implements AddDocumentUseCase {
     }
 
     private Document getDocument(String mobile, AddDocumentRequest request) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return new Document.Builder()
                 .mobile(mobile)
                 .documentType(request.getDocumentType())
@@ -38,10 +40,10 @@ public class AddDocumentUseCaseImp implements AddDocumentUseCase {
                 .issuingCountry(request.getIssuingCountry())
                 .personalNumber(request.getPersonalNumber())
                 .regNumber(request.getRegNumber())
-                .validThrough(LocalDate.parse(request.getValidThrough()))
+                .validThrough(request.getValidThrough().isEmpty() ? LocalDate.now() : LocalDate.parse(request.getValidThrough()))
                 .ownComment(request.getOwnComment())
                 .helpDeskComment(request.getHelpDeskComment())
-                .birthDate(LocalDate.parse(request.getBirthDate()))
+                .birthDate(request.getBirthDate().isEmpty() ? LocalDate.now() : LocalDate.parse(request.getBirthDate(), formatter))
                 .gender(request.getGender())
                 .nationality(request.getNationality())
                 .image(new Image.Builder().documentIdImageFace(request.getDocumentIdImageFace()).documentIdImageBack(request.getDocumentIdImageBack()).personalImage(request.getPersonalImage()).build())
