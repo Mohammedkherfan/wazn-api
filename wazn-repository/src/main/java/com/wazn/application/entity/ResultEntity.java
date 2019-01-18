@@ -10,16 +10,16 @@ public class ResultEntity {
     @Column(name = "MOBILE", nullable = false, unique = true)
     private String mobile;
 
-    @Column(name = "ASS_DOC_BEARER", nullable = false)
+    @Column(name = "ASS_DOC_BEARER", nullable = true)
     private Integer assessmentDocumentBearer;
 
-    @Column(name = "FACE_MATCH", nullable = false)
+    @Column(name = "FACE_MATCH", nullable = true)
     private Integer faceMatch;
 
-    @Column(name = "MRZ", nullable = false)
+    @Column(name = "MRZ", nullable = true)
     private Integer checkMRZ;
 
-    @Column(name = "AUTO_AUTH", nullable = false)
+    @Column(name = "AUTO_AUTH", nullable = true)
     private Integer automationAuthentications;
 
     @OneToOne

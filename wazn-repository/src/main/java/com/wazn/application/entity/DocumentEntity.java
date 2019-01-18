@@ -11,37 +11,37 @@ public class DocumentEntity {
     @Column(name = "MOBILE", nullable = false, unique = true)
     private String mobile;
 
-    @Column(name = "BIRTH_DATE", nullable = false)
+    @Column(name = "BIRTH_DATE", nullable = true)
     private LocalDate birthDate;
 
-    @Column(name = "GENDER", nullable = false)
+    @Column(name = "GENDER", nullable = true)
     private String gender;
 
-    @Column(name = "NATIONALITY", nullable = false)
+    @Column(name = "NATIONALITY", nullable = true)
     private String nationality;
 
-    @Column(name = "DOC_TYPE", nullable = false)
+    @Column(name = "DOC_TYPE", nullable = true)
     private String documentType;
 
-    @Column(name = "DOC_NUMBER", nullable = false)
+    @Column(name = "DOC_NUMBER", nullable = true)
     private String documentNumber;
 
-    @Column(name = "ISSUING_COUNTRY", nullable = false)
+    @Column(name = "ISSUING_COUNTRY", nullable = true)
     private String issuingCountry;
 
-    @Column(name = "PERSONAL_NUM", nullable = false)
+    @Column(name = "PERSONAL_NUM", nullable = true)
     private String personalNumber;
 
-    @Column(name = "REG_NUM", nullable = false)
+    @Column(name = "REG_NUM", nullable = true)
     private String regNumber;
 
-    @Column(name = "VALID_THROUGH", nullable = false)
+    @Column(name = "VALID_THROUGH", nullable = true)
     private LocalDate validThrough;
 
-    @Column(name = "OWN_COMMENT", nullable = false, length = 1000000)
+    @Column(name = "OWN_COMMENT", nullable = true, length = 1000000)
     private String ownComment;
 
-    @Column(name = "HELP_COMMENT", nullable = false, length = 1000000)
+    @Column(name = "HELP_COMMENT", nullable = true, length = 1000000)
     private String helpDeskComment;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "documentEntity", cascade = CascadeType.ALL)

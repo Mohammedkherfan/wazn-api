@@ -32,7 +32,7 @@ public class AddDocumentUseCaseImp implements AddDocumentUseCase {
     }
 
     private Document getDocument(String mobile, AddDocumentRequest request) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return new Document.Builder()
                 .mobile(mobile)
                 .documentType(request.getDocumentType())
@@ -43,12 +43,13 @@ public class AddDocumentUseCaseImp implements AddDocumentUseCase {
                 .validThrough(request.getValidThrough().isEmpty() ? LocalDate.now() : LocalDate.parse(request.getValidThrough()))
                 .ownComment(request.getOwnComment())
                 .helpDeskComment(request.getHelpDeskComment())
-                .birthDate(request.getBirthDate().isEmpty() ? LocalDate.now() : LocalDate.parse(request.getBirthDate(), formatter))
+                .birthDate(request.getBirthDate().isEmpty() ? LocalDate.now() : LocalDate.parse(request.getBirthDate().split("T")[0]))
                 .gender(request.getGender())
                 .nationality(request.getNationality())
                 .image(new Image.Builder().documentIdImageFace(request.getDocumentIdImageFace()).documentIdImageBack(request.getDocumentIdImageBack()).personalImage(request.getPersonalImage()).build())
-                .report(new Report.Builder().enteredBy(request.getEnteredBy()).location(request.getLocation()).enteredOn(LocalDateTime.parse(request.getEnteredOn())).build())
+                .report(new Report.Builder().enteredBy(request.getEnteredBy()).location(request.getIssuingCountry()).enteredOn(LocalDateTime.now()).build())
                 .result(new Result.Builder().assessmentDocumentBearer(request.getAssessmentDocumentBearer()).automationAuthentications(request.getAutomationAuthentications()).checkMRZ(request.getCheckMRZ()).faceMatch(request.getFaceMatch()).build())
                 .build();
     }
+
 }

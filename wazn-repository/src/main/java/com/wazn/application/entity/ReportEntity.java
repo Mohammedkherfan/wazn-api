@@ -12,13 +12,13 @@ public class ReportEntity {
     @Column(name = "MOBILE", nullable = false, unique = true)
     private String mobile;
 
-    @Column(name = "ENTERED_ON", nullable = false)
+    @Column(name = "ENTERED_ON", nullable = true)
     private LocalDateTime enteredOn;
 
-    @Column(name = "LOCATION", nullable = false)
+    @Column(name = "LOCATION", nullable = true)
     private String location;
 
-    @Column(name = "ENTERED_BY", nullable = false)
+    @Column(name = "ENTERED_BY", nullable = true)
     private String enteredBy;
 
     @OneToOne

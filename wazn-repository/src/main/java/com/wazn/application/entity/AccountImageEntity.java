@@ -10,13 +10,13 @@ public class AccountImageEntity {
     @Column(name = "MOBILE", nullable = false, unique = true)
     private String mobile;
 
-    @Column(name = "DOCUMENT_IMG_FACE", nullable = false, length = 1000000)
+    @Column(name = "DOCUMENT_IMG_FACE", nullable = true, length = 9999999)
     private byte[] documentIdImageFace;
 
-    @Column(name = "DOCUMENT_IMG_BACK", nullable = false, length = 1000000)
+    @Column(name = "DOCUMENT_IMG_BACK", nullable = true, length = 9999999)
     private byte[] documentIdImageBack;
 
-    @Column(name = "PERSONAL_IMG", nullable = false, length = 1000000)
+    @Column(name = "PERSONAL_IMG", nullable = true, length = 9999999)
     private byte[] personalImage;
 
     @OneToOne
