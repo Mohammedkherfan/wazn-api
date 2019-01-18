@@ -181,13 +181,13 @@ public class AccountHypermedia {
     private Resource getFindMeeting(Object object) {
         Resource resource = null;
         if (!isNull(object)) {
-            ListMeetingResponse response = (ListMeetingResponse) object;
+            GetMeetingScheduleResponse response = (GetMeetingScheduleResponse) object;
             resource = new Resource(response);
             resource.add(linkTo(methodOn(AccountControllerImp.class).getMeeting(response.getMobile())).withSelfRel().withType("GET"));
             resource = new Resource(response);
             return resource;
         }
-        return new Resource(new ListMeetingResponse());
+        return new Resource(new GetMeetingScheduleResponse());
     }
 
     private Resource getListMeetingResources(Object object) {

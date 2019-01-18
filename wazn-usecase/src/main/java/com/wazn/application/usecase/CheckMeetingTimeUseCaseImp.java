@@ -19,6 +19,7 @@ public class CheckMeetingTimeUseCaseImp implements CheckMeetingTimeUseCase {
         try {
             Meeting meeting = accountRepository.getMeeting(mobile);
             if (meeting.getStatus() == 0) {
+                System.out.println(LocalDateTime.now());
                 if (LocalDateTime.now().isAfter(meeting.getStartDate())) {
                     Meeting updateMeeting = new Meeting.Builder().mobile(meeting.getMobile()).note(meeting.getNote()).startDate(meeting.getStartDate()).status(1).getBuild();
                     accountRepository.updateMeeting(updateMeeting);

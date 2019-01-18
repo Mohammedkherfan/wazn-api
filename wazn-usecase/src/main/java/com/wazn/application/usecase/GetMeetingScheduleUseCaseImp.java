@@ -17,7 +17,7 @@ public class GetMeetingScheduleUseCaseImp implements GetMeetingScheduleUseCase {
     public GetMeetingScheduleResponse getMeeting(String mobile) {
         try {
             Meeting meeting = accountRepository.getMeeting(mobile);
-            return new GetMeetingScheduleResponse(meeting.getMobile(), meeting.getStartDate(), meeting.getNote());
+            return new GetMeetingScheduleResponse(meeting.getMobile(), String.valueOf(meeting.getStartDate()), meeting.getNote());
         }catch (Exception ex) {
             throw new MeetingScheduleException(ex.getMessage());
         }
