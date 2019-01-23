@@ -27,6 +27,7 @@ public class GetAllDataResponse {
     private byte[] documentIdImageFace;
     private byte[] documentIdImageBack;
     private byte[] personalImage;
+    private byte[] selfImage;
 
     private String startDate;
     private String note;
@@ -47,7 +48,7 @@ public class GetAllDataResponse {
     public GetAllDataResponse() {
     }
 
-    public GetAllDataResponse(String mobile, String email, String fullName, String verificationCode, String type, String documentType, String documentNumber, String issuingCountry, String personalNumber, String regNumber, String validThrough, String ownComment, String helpDeskComment, String birthDate, String gender, String nationality, byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage, String startDate, String note, String enteredOn, String location, String enteredBy, String assessmentDocumentBearer, String faceMatch, String checkMRZ, String automationAuthentications, byte[] passportOrVisaImage, byte[] salaryCertificateImage, byte[] taxDeclarationImage, String status) {
+    public GetAllDataResponse(String mobile, String email, String fullName, String verificationCode, String type, String documentType, String documentNumber, String issuingCountry, String personalNumber, String regNumber, String validThrough, String ownComment, String helpDeskComment, String birthDate, String gender, String nationality, byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage, String startDate, String note, String enteredOn, String location, String enteredBy, String assessmentDocumentBearer, String faceMatch, String checkMRZ, String automationAuthentications, byte[] passportOrVisaImage, byte[] salaryCertificateImage, byte[] taxDeclarationImage, String status, byte[] selfImage) {
         this.email = email;
         this.mobile = mobile;
         this.fullName = fullName;
@@ -82,6 +83,7 @@ public class GetAllDataResponse {
         this.salaryCertificateImage = salaryCertificateImage;
         this.taxDeclarationImage = taxDeclarationImage;
         this.status = status;
+        this.selfImage = selfImage;
     }
 
 
@@ -355,5 +357,13 @@ public class GetAllDataResponse {
 
     public void setTaxDeclarationImage(byte[] taxDeclarationImage) {
         this.taxDeclarationImage = taxDeclarationImage;
+    }
+
+    public byte[] getSelfImage() {
+        return selfImage;
+    }
+
+    public void setSelfImage(byte[] selfImage) {
+        this.selfImage = selfImage;
     }
 }

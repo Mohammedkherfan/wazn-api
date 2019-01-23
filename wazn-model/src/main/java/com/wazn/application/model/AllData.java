@@ -30,6 +30,7 @@ public class AllData {
     private byte[] documentIdImageFace;
     private byte[] documentIdImageBack;
     private byte[] personalImage;
+    private byte[] selfImage;
 
     private LocalDateTime startDate;
     private String note;
@@ -50,7 +51,7 @@ public class AllData {
     public AllData() {
     }
 
-    public AllData(String email, String mobile, String fullName, String verificationCode, String password, String confirmPassword, Integer type, String documentType, String documentNumber, String issuingCountry, String personalNumber, String regNumber, LocalDate validThrough, String ownComment, String helpDeskComment, LocalDate birthDate, String gender, String nationality, byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage, LocalDateTime startDate, String note, LocalDateTime enteredOn, String location, String enteredBy, Boolean assessmentDocumentBearer, Boolean faceMatch, Boolean checkMRZ, Boolean automationAuthentications, byte[] passportOrVisaImage, byte[] salaryCertificateImage, byte[] taxDeclarationImage, Integer status) {
+    public AllData(String email, String mobile, String fullName, String verificationCode, String password, String confirmPassword, Integer type, String documentType, String documentNumber, String issuingCountry, String personalNumber, String regNumber, LocalDate validThrough, String ownComment, String helpDeskComment, LocalDate birthDate, String gender, String nationality, byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage, LocalDateTime startDate, String note, LocalDateTime enteredOn, String location, String enteredBy, Boolean assessmentDocumentBearer, Boolean faceMatch, Boolean checkMRZ, Boolean automationAuthentications, byte[] passportOrVisaImage, byte[] salaryCertificateImage, byte[] taxDeclarationImage, Integer status, byte[] selfImage) {
         this.email = email;
         this.mobile = mobile;
         this.fullName = fullName;
@@ -85,6 +86,7 @@ public class AllData {
         this.salaryCertificateImage = salaryCertificateImage;
         this.taxDeclarationImage = taxDeclarationImage;
         this.status = status;
+        this.selfImage = selfImage;
     }
 
     public Integer getStatus() {
@@ -223,6 +225,10 @@ public class AllData {
         return taxDeclarationImage;
     }
 
+    public byte[] getSelfImage() {
+        return selfImage;
+    }
+
     public static class Builder {
 
         private String email;
@@ -250,6 +256,7 @@ public class AllData {
         private byte[] documentIdImageFace;
         private byte[] documentIdImageBack;
         private byte[] personalImage;
+        private byte[] selfImage;
 
         private LocalDateTime startDate;
         private String note;
@@ -433,14 +440,18 @@ public class AllData {
             return this;
         }
 
-
         public Builder status(Integer status) {
             this.status = status;
             return this;
         }
 
+        public Builder selfImage(byte[] selfImage) {
+            this.selfImage = selfImage;
+            return this;
+        }
+
         public AllData build() {
-            return new AllData(email, mobile, fullName, verificationCode, password, confirmPassword, type, documentType, documentNumber, issuingCountry, personalNumber, regNumber, validThrough, ownComment, helpDeskComment, birthDate, gender, nationality, documentIdImageFace, documentIdImageBack, personalImage, startDate, note, enteredOn, location, enteredBy, assessmentDocumentBearer, faceMatch, checkMRZ, automationAuthentications, passportOrVisaImage, salaryCertificateImage, taxDeclarationImage, status);
+            return new AllData(email, mobile, fullName, verificationCode, password, confirmPassword, type, documentType, documentNumber, issuingCountry, personalNumber, regNumber, validThrough, ownComment, helpDeskComment, birthDate, gender, nationality, documentIdImageFace, documentIdImageBack, personalImage, startDate, note, enteredOn, location, enteredBy, assessmentDocumentBearer, faceMatch, checkMRZ, automationAuthentications, passportOrVisaImage, salaryCertificateImage, taxDeclarationImage, status, selfImage);
         }
     }
 }

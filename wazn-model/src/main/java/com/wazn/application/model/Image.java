@@ -7,12 +7,14 @@ public class Image {
     private byte[] documentIdImageFace;
     private byte[] documentIdImageBack;
     private byte[] personalImage;
+    private byte[] selfImage;
 
-    public Image(byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage) {
+    public Image(byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage, byte[] selfImage) {
         new Validator(documentIdImageFace, documentIdImageBack, personalImage);
         this.documentIdImageFace = documentIdImageFace;
         this.documentIdImageBack = documentIdImageBack;
         this.personalImage = personalImage;
+        this.selfImage = selfImage;
     }
 
     public byte[] getDocumentIdImageFace() {
@@ -27,11 +29,16 @@ public class Image {
         return personalImage;
     }
 
+    public byte[] getSelfImage() {
+        return selfImage;
+    }
+
     public static class Builder {
 
         private byte[] documentIdImageFace;
         private byte[] documentIdImageBack;
         private byte[] personalImage;
+        private byte[] selfImage;
 
         public Builder documentIdImageFace(byte[] documentIdImageFace) {
             this.documentIdImageFace = documentIdImageFace;
@@ -48,8 +55,13 @@ public class Image {
             return this;
         }
 
+        public Builder selfImage(byte[] selfImage) {
+            this.selfImage = selfImage;
+            return this;
+        }
+
         public Image build() {
-            return new Image(documentIdImageFace, documentIdImageBack, personalImage);
+            return new Image(documentIdImageFace, documentIdImageBack, personalImage, selfImage);
         }
     }
 }

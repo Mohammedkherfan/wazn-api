@@ -19,6 +19,9 @@ public class AccountImageEntity {
     @Column(name = "PERSONAL_IMG", nullable = true, length = 9999999)
     private byte[] personalImage;
 
+    @Column(name = "SELF_IMG", nullable = true, length = 9999999)
+    private byte[] selfImage;
+
     @OneToOne
     @JoinColumn(name = "MOBILE")
     private DocumentEntity documentEntity;
@@ -26,11 +29,12 @@ public class AccountImageEntity {
     public AccountImageEntity() {
     }
 
-    public AccountImageEntity(String mobile, byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage) {
+    public AccountImageEntity(String mobile, byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage, byte[] selfImage) {
         this.mobile = mobile;
         this.documentIdImageFace = documentIdImageFace;
         this.documentIdImageBack = documentIdImageBack;
         this.personalImage = personalImage;
+        this.selfImage = selfImage;
     }
 
     public String getMobile() {
@@ -71,5 +75,13 @@ public class AccountImageEntity {
 
     public void setDocumentEntity(DocumentEntity documentEntity) {
         this.documentEntity = documentEntity;
+    }
+
+    public byte[] getSelfImage() {
+        return selfImage;
+    }
+
+    public void setSelfImage(byte[] selfImage) {
+        this.selfImage = selfImage;
     }
 }

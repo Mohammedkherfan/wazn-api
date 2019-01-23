@@ -46,7 +46,7 @@ public class AddDocumentUseCaseImp implements AddDocumentUseCase {
                 .birthDate(request.getBirthDate().isEmpty() ? LocalDate.now() : LocalDate.parse(request.getBirthDate().split("T")[0]))
                 .gender(request.getGender())
                 .nationality(request.getNationality())
-                .image(new Image.Builder().documentIdImageFace(request.getDocumentIdImageFace()).documentIdImageBack(request.getDocumentIdImageBack()).personalImage(request.getPersonalImage()).build())
+                .image(new Image.Builder().documentIdImageFace(request.getDocumentIdImageFace()).documentIdImageBack(request.getDocumentIdImageBack()).personalImage(request.getPersonalImage()).selfImage(request.getSelfImage()).build())
                 .report(new Report.Builder().enteredBy(request.getEnteredBy()).location(request.getIssuingCountry()).enteredOn(LocalDateTime.now()).build())
                 .result(new Result.Builder().assessmentDocumentBearer(request.getAssessmentDocumentBearer()).automationAuthentications(request.getAutomationAuthentications()).checkMRZ(request.getCheckMRZ()).faceMatch(request.getFaceMatch()).build())
                 .build();

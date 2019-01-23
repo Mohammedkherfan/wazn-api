@@ -55,7 +55,8 @@ public class GetAllDataUseCaseImp implements GetAllDataUseCase {
                         e.getPassportOrVisaImage(),
                         e.getSalaryCertificateImage(),
                         e.getTaxDeclarationImage(),
-                        getAccountStatus(e.getStatus())));
+                        getAccountStatus(e.getStatus()),
+                        e.getSelfImage()));
             });
             return list;
         }catch (Exception ex) {
@@ -99,7 +100,8 @@ public class GetAllDataUseCaseImp implements GetAllDataUseCase {
                     allData.getPassportOrVisaImage(),
                     allData.getSalaryCertificateImage(),
                     allData.getTaxDeclarationImage(),
-                    getAccountType(allData.getStatus()));
+                    getAccountType(allData.getStatus()),
+                    allData.getSelfImage());
         }catch (Exception ex) {
             throw new AccountException(ex.getMessage());
         }

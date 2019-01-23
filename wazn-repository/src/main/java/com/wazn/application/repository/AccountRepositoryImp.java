@@ -232,6 +232,7 @@ public class AccountRepositoryImp implements AccountRepository {
                     .passportOrVisaImage(isNull(e.getUploadDocumentEntity()) ? null : e.getUploadDocumentEntity().getPassportOrVisaImage())
                     .salaryCertificateImage(isNull(e.getUploadDocumentEntity()) ? null : e.getUploadDocumentEntity().getSalaryCertificateImage())
                     .taxDeclarationImage(isNull(e.getUploadDocumentEntity()) ? null : e.getUploadDocumentEntity().getTaxDeclarationImage())
+                    .selfImage(isNull(e.getDocumentEntity()) ? null :e.getDocumentEntity().getAccountImageEntity().getSelfImage())
                     .build()
             );
         });

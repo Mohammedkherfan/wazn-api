@@ -17,6 +17,7 @@ public class AddDocumentRequest {
     private byte[] documentIdImageFace;
     private byte[] documentIdImageBack;
     private byte[] personalImage;
+    private byte[] selfImage;
 
     private String enteredOn;
     private String location;
@@ -30,7 +31,7 @@ public class AddDocumentRequest {
     public AddDocumentRequest() {
     }
 
-    public AddDocumentRequest(String documentType, String documentNumber, String issuingCountry, String personalNumber, String regNumber, String validThrough, String ownComment, String helpDeskComment, String birthDate, String gender, String nationality, byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage, String enteredOn, String location, String enteredBy, Boolean assessmentDocumentBearer, Boolean faceMatch, Boolean checkMRZ, Boolean automationAuthentications) {
+    public AddDocumentRequest(String documentType, String documentNumber, String issuingCountry, String personalNumber, String regNumber, String validThrough, String ownComment, String helpDeskComment, String birthDate, String gender, String nationality, byte[] documentIdImageFace, byte[] documentIdImageBack, byte[] personalImage, String enteredOn, String location, String enteredBy, Boolean assessmentDocumentBearer, Boolean faceMatch, Boolean checkMRZ, Boolean automationAuthentications, byte[] selfImage) {
         this.documentType = documentType;
         this.documentNumber = documentNumber;
         this.issuingCountry = issuingCountry;
@@ -52,6 +53,7 @@ public class AddDocumentRequest {
         this.faceMatch = faceMatch;
         this.checkMRZ = checkMRZ;
         this.automationAuthentications = automationAuthentications;
+        this.selfImage = selfImage;
     }
 
     public String getDocumentType() {
@@ -220,5 +222,13 @@ public class AddDocumentRequest {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
+    }
+
+    public byte[] getSelfImage() {
+        return selfImage;
+    }
+
+    public void setSelfImage(byte[] selfImage) {
+        this.selfImage = selfImage;
     }
 }

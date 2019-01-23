@@ -30,6 +30,7 @@ public class DocumentMapperImp implements DocumentMapper {
                         .documentIdImageFace(documentEntity.getAccountImageEntity().getDocumentIdImageFace())
                         .documentIdImageBack(documentEntity.getAccountImageEntity().getDocumentIdImageBack())
                         .personalImage(documentEntity.getAccountImageEntity().getPersonalImage())
+                        .selfImage(documentEntity.getAccountImageEntity().getSelfImage())
                         .build())
                 .report(new Report.Builder()
                         .enteredBy(documentEntity.getReportEntity().getEnteredBy())
@@ -60,7 +61,7 @@ public class DocumentMapperImp implements DocumentMapper {
         documentEntity.setBirthDate(document.getBirthDate());
         documentEntity.setGender(document.getGender());
         documentEntity.setNationality(document.getNationality());
-        documentEntity.setAccountImageEntity(new AccountImageEntity(document.getMobile(), document.getImage().getDocumentIdImageFace(), document.getImage().getDocumentIdImageBack(), document.getImage().getPersonalImage()));
+        documentEntity.setAccountImageEntity(new AccountImageEntity(document.getMobile(), document.getImage().getDocumentIdImageFace(), document.getImage().getDocumentIdImageBack(), document.getImage().getPersonalImage(), document.getImage().getSelfImage()));
         documentEntity.setReportEntity(new ReportEntity(document.getMobile(), document.getReport().getEnteredOn(), document.getReport().getLocation(), document.getReport().getEnteredBy()));
         documentEntity.setResultEntity(new ResultEntity(document.getMobile(), document.getResult().getAssessmentDocumentBearer() ? 1 : 0, document.getResult().getFaceMatch() ? 1 : 0, document.getResult().getCheckMRZ() ? 1 : 0, document.getResult().getAutomationAuthentications() ? 1 : 0));
         return documentEntity;
