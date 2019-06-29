@@ -7,6 +7,7 @@ import com.wazn.application.response.ListUserResponse;
 import com.wazn.application.response.UpdateUserResponse;
 import org.springframework.hateoas.Resource;
 
+import java.sql.Blob;
 import java.util.List;
 
 public interface UserController {

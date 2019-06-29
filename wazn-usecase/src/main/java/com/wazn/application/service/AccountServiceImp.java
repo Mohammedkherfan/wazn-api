@@ -10,6 +10,7 @@ import com.wazn.application.response.*;
 import com.wazn.application.usecase.*;
 import com.wazn.application.validation.MobileValidator;
 
+import java.sql.Blob;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -32,6 +33,7 @@ public class AccountServiceImp implements AccountService {
     private UploadDocumentUseCase uploadDocumentUseCase;
     private GetUploadedDocumentUseCase getUploadedDocumentUseCase;
     private GetAllDataUseCase getAllDataUseCase;
+    private DownloadImage downloadImage;
 
     public AccountServiceImp(AccountRepository repository) {
         this.addAccountUseCase = new AddAccountUseCaseImp(repository);
@@ -50,6 +52,7 @@ public class AccountServiceImp implements AccountService {
         this.uploadDocumentUseCase = new UploadDocumentUseCaseImp(repository);
         this.getUploadedDocumentUseCase = new GetUploadedDocumentUseCaseImp(repository);
         this.getAllDataUseCase = new GetAllDataUseCaseImp(repository);
+        this.downloadImage = new DownloadImageImp(repository);
     }
 
     @Override
@@ -203,5 +206,14 @@ public class AccountServiceImp implements AccountService {
         if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
         if (isNull(comment) || comment.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Comment");
         getAllDataUseCase.saveComment(mobile, comment);
+    }
+
+    @Override
+    public byte[] download(String mobile, String type) {
+        MobileValidator mobileValidator = new MobileValidator();
+        if (isNull(mobile) || mobile.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (!mobileValidator.validateMobile(mobile)) throw new InvalidAccountMobileException("Invalid Mobile");
+        if (isNull(type) || type.trim().isEmpty()) throw new InvalidAccountMobileException("Invalid Download Type");
+        return downloadImage.download(mobile, type);
     }
 }

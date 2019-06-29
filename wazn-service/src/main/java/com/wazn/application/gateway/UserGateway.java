@@ -8,6 +8,7 @@ import com.wazn.application.response.UpdateUserResponse;
 import com.wazn.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Blob;
 import java.util.List;
 
 public class UserGateway {

@@ -3,6 +3,7 @@ package com.wazn.application.controller;
 import com.wazn.application.exception.AccountException;
 import com.wazn.application.exception.MeetingScheduleException;
 import com.wazn.application.exception.ReportException;
+import com.wazn.application.exception.UserException;
 import com.wazn.application.gateway.AccountGateway;
 import com.wazn.application.hateoas.AccountHypermedia;
 import com.wazn.application.request.*;
@@ -17,6 +18,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -371,6 +373,22 @@ public class AccountControllerImp implements AccountController {
         } catch (Exception ex) {
             log.error("Class: AccountControllerImp" + ", Method: updateStatus" + ", Exception: " + ex);
             throw new AccountException(ex.getMessage());
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/{mobile}/{type}/download", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin()
+    @ApiOperation(value = "Method to list users.", notes = "This method used when you want to list users.")
+    public byte[] download(@PathVariable String mobile, @PathVariable String type) {
+        try {
+            return gateway.download(mobile, type);
+        } catch (UserException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            log.error("Class: UserControllerImp" + ", Method: download" + ", Exception: " + ex);
+            throw new UserException(ex.getMessage());
         }
     }
 

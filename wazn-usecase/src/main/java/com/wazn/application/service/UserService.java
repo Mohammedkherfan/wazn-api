@@ -6,6 +6,7 @@ import com.wazn.application.response.AddUserResponse;
 import com.wazn.application.response.ListUserResponse;
 import com.wazn.application.response.UpdateUserResponse;
 
+import java.sql.Blob;
 import java.util.List;
 
 public interface UserService {

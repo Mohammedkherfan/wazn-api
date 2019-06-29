@@ -4,6 +4,7 @@ import com.wazn.application.request.*;
 import com.wazn.application.response.*;
 import org.springframework.hateoas.Resource;
 
+import java.sql.Blob;
 import java.util.List;
 
 public interface AccountController {
@@ -45,4 +46,6 @@ public interface AccountController {
     void saveComment(String mobile, String comment);
 
     void updateStatus(String mobile, String status);
+
+    byte[] download(String mobile, String type);
 }

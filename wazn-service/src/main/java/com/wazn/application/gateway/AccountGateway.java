@@ -5,6 +5,7 @@ import com.wazn.application.response.*;
 import com.wazn.application.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Blob;
 import java.util.List;
 
 public class AccountGateway {
@@ -58,6 +59,10 @@ public class AccountGateway {
 
     public void saveComment(String mobile, String comment) {
         service.saveComment(mobile, comment);
+    }
+
+    public byte[] download(String mobile, String type) {
+        return service.download(mobile, type);
     }
 }
 

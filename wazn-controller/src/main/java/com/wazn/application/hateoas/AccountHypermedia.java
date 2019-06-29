@@ -67,6 +67,7 @@ public class AccountHypermedia {
             resource = getListUser(object);
         if (operation.equals(UPDATE_USER))
             resource = getUpdateUser(object);
+
         return resource;
     }
 

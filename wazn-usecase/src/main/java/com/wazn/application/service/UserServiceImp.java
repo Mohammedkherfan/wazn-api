@@ -8,6 +8,7 @@ import com.wazn.application.response.ListUserResponse;
 import com.wazn.application.response.UpdateUserResponse;
 import com.wazn.application.usecase.*;
 
+import java.sql.Blob;
 import java.util.List;
 
 public class UserServiceImp implements UserService {

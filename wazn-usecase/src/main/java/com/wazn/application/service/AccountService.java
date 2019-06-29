@@ -3,6 +3,7 @@ package com.wazn.application.service;
 import com.wazn.application.request.*;
 import com.wazn.application.response.*;
 
+import java.sql.Blob;
 import java.util.List;
 
 public interface AccountService {
@@ -45,5 +46,5 @@ public interface AccountService {
 
     void saveComment(String mobile, String comment);
 
-
+    byte[] download(String mobile, String type);
 }
